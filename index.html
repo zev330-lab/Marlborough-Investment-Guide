@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Marlborough Investor App</title>
+  <link rel="icon" href="icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Navigation bar with brand and menu toggle -->
+  <nav class="navbar">
+    <div class="brand">
+      <img src="icon.png" alt="Logo" class="logo">
+      <span>Marlborough Investor</span>
+    </div>
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
+  </nav>
+  <!-- Slide‑out menu for mobile -->
+  <aside class="side-menu" id="sideMenu">
+    <button class="close-menu" aria-label="Close menu">&times;</button>
+    <a href="#dashboard" class="menu-link">Dashboard</a>
+    <a href="#strategies" class="menu-link">Strategies</a>
+    <a href="#opportunities" class="menu-link">Opportunities</a>
+    <a href="#assumptions" class="menu-link">Assumptions</a>
+    <a href="#offmarket" class="menu-link">Off‑Market</a>
+    <a href="#research" class="menu-link">Research</a>
+  </aside>
+  <!-- Hero section -->
+  <header class="hero">
+    <h1>Invest Smarter in Marlborough</h1>
+    <p>Access data‑driven insights, curated opportunities and clear strategies for building long‑term wealth in the Marlborough real‑estate market.</p>
+  </header>
+  <main>
+    <!-- Dashboard -->
+    <section id="dashboard" class="section active">
+      <h2>How to use this app</h2>
+      <p>This app gives you a comprehensive view of the Marlborough real‑estate market. Use the menu (☰) in the top right to navigate between sections. Each tab presents research, opportunities and assumptions so you can make informed decisions. On phones, the menu slides in and out to save space.</p>
+      <h2>Market Snapshot</h2>
+      <p>Marlborough’s housing market has grown steadily thanks to strong life‑sciences and technology employers. Single‑family home prices rose from about $505k in 2021 to $615k in 2025, condos from $370k to $445k, and small multi‑family properties from $615k to $760k. Two‑bed rents average around $2.4k per month.</p>
+      <div class="charts">
+        <img src="assets/price_trend.png" alt="Median sale price trends">
+        <img src="assets/rent_bands.png" alt="Rent bands by bedroom">
+        <img src="assets/cap_rates.png" alt="Cap‑rate ranges by strategy">
+      </div>
+      <h2>Strategy Ranking Summary</h2>
+      <p>We ranked each strategy by expected risk‑adjusted return, balancing income, appreciation and execution risk.</p>
+      <ol class="ranking">
+        <li><strong>Value‑Add / Renovation</strong> – buy under‑priced properties, renovate and raise rents to capture equity and income.</li>
+        <li><strong>Creative / ADU &amp; Unconventional</strong> – add accessory units or pursue co‑living/short‑term rentals under Massachusetts’ ADU law.</li>
+        <li><strong>Small Multi‑Family Income</strong> – own 2–4 unit properties for steady cash flow and moderate cap rates.</li>
+        <li><strong>Development / Redevelopment</strong> – subdivide or build new housing; higher yields but higher entitlement and construction risk.</li>
+        <li><strong>Core Buy‑and‑Hold</strong> – acquire newer single‑family homes or condos for long‑term appreciation; lowest yield.</li>
+      </ol>
+    </section>
+    <!-- Strategies -->
+    <section id="strategies" class="section">
+      <h2>Investment Strategies</h2>
+      <div class="strategy-card">
+        <h3>Core Buy‑and‑Hold</h3>
+        <p>Acquire well‑maintained single‑family homes or condos and hold for long‑term appreciation. Entry cap rates around 5–6%, with modest but stable cash flow.</p>
+        <ul>
+          <li><strong>Buy box:</strong> 2–4 bedroom homes built after 1980 in stable neighbourhoods.</li>
+          <li><strong>Entry cap rate:</strong> ≥ 5% (Balanced).</li>
+          <li><strong>Risks:</strong> Low yield; dependent on appreciation; sensitive to interest rates.</li>
+          <li><strong>Investor fit:</strong> Conservative investors prioritising capital preservation.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h3>Value‑Add / Renovation</h3>
+        <p>Buy dated properties at a discount, renovate and reposition them to achieve higher rents and compressed cap rates. Stabilised cap rates can exceed 7%.</p>
+        <ul>
+          <li><strong>Buy box:</strong> Pre‑1990 homes or condos with cosmetic or structural deficiencies, priced at least 10% below comparable sales.</li>
+          <li><strong>Entry cap rate:</strong> ≥ 5.0% (Balanced) or ≥ 4.5% (Growth).</li>
+          <li><strong>Risks:</strong> Renovation overruns; permitting delays; tenant turnover; HOA approvals.</li>
+          <li><strong>Investor fit:</strong> Hands‑on investors comfortable with construction and budget management.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h3>Small Multi‑Family Income</h3>
+        <p>Acquire two‑ to four‑unit buildings for steady cash flow. Typical cap rates range from 5.5% to 6.5%, improving as rents are raised or units reconfigured.</p>
+        <ul>
+          <li><strong>Buy box:</strong> 2–4 unit properties near employers or transit, with potential to finish basements or attics.</li>
+          <li><strong>Entry cap rate:</strong> ≥ 5.5% (Balanced).</li>
+          <li><strong>Risks:</strong> Management complexity; possible non‑conforming units; more restrictive financing.</li>
+          <li><strong>Investor fit:</strong> Investors seeking cash flow and willing to manage multiple tenants.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h3>Development / Redevelopment</h3>
+        <p>Unlock value by subdividing large parcels or constructing new housing. Required yields are high (≥ 15%) to compensate for entitlement and construction risks.</p>
+        <ul>
+          <li><strong>Buy box:</strong> Parcels ≥ 0.5 acres, under‑improved commercial sites or single‑family homes on oversized lots.</li>
+          <li><strong>Yield target:</strong> ≥ 15% IRR; stabilised cap rate 7–8%.</li>
+          <li><strong>Risks:</strong> Lengthy permitting; construction cost escalation; market absorption risk.</li>
+          <li><strong>Investor fit:</strong> Experienced developers or joint ventures with entitlement expertise.</li>
+        </ul>
+      </div>
+      <div class="strategy-card">
+        <h3>Creative / ADU &amp; Unconventional</h3>
+        <p>Leverage the new ADU law to add accessory units or explore co‑living and short‑term rentals. Entry cap rates can be as low as 4%, but stabilised yields may exceed 7% once additional units are rented.</p>
+        <ul>
+          <li><strong>Buy box:</strong> Homes with oversized lots, detached garages or walk‑out basements; properties within 0.5 mile of transit; existing in‑law apartments.</li>
+          <li><strong>Entry cap rate:</strong> ≥ 4.5% (Balanced) or ≥ 4% (Growth).</li>
+          <li><strong>Risks:</strong> Compliance with ADU regulations; higher expense ratios; potential rent‑control legislation.</li>
+          <li><strong>Investor fit:</strong> Innovative investors open to creative space use and regulatory navigation.</li>
+        </ul>
+      </div>
+    </section>
+    <!-- Opportunities -->
+    <section id="opportunities" class="section">
+      <h2>On‑Market Opportunities</h2>
+      <p>Each card summarises a current MLS listing that meets our Balanced or Growth profile criteria. Deals are labelled as Recommended or Watchlist. If no listings appear under a strategy, there are currently no qualifying properties.</p>
+      <h3>Value‑Add / Renovation</h3>
+      <div class="opportunity-list">
+        <article class="opp-card">
+          <h4>35 High St &ndash; Condo 1/1</h4>
+          <ul>
+          <li><strong>Price:</strong> $199k</li>
+          <li><strong>Estimated rent:</strong> $1,600/mo</li>
+          <li><strong>NOI:</strong> $12,480</li>
+            <li><strong>Entry cap:</strong> 6.5%</li>
+            <li><strong>Stabilised cap:</strong> 9.6%</li>
+            <li><strong>Notes:</strong> Low HOA; cosmetic refresh needed.</li>
+            <li><strong>Status:</strong> <span class="badge recommended">Recommended</span></li>
+          </ul>
+        </article>
+        <article class="opp-card">
+          <h4>102 Liberty St &ndash; SF 3/1</h4>
+          <ul>
+          <li><strong>Price:</strong> $408k</li>
+          <li><strong>Estimated rent:</strong> $2,600/mo</li>
+          <li><strong>NOI:</strong> $22,880</li>
+            <li><strong>Entry cap:</strong> 4.9%</li>
+            <li><strong>Stabilised cap:</strong> 7.0%</li>
+            <li><strong>Notes:</strong> Basement conversion potential.</li>
+            <li><strong>Status:</strong> <span class="badge watchlist">Watchlist</span></li>
+          </ul>
+        </article>
+        <article class="opp-card">
+          <h4>688 Boston Post Rd E &ndash; Condo 2/1</h4>
+          <ul>
+          <li><strong>Price:</strong> $260k</li>
+          <li><strong>Estimated rent:</strong> $2,000/mo</li>
+          <li><strong>NOI:</strong> $13,200</li>
+            <li><strong>Entry cap:</strong> 4.0%</li>
+            <li><strong>Stabilised cap:</strong> 6.0%</li>
+            <li><strong>Notes:</strong> Unknown HOA; needs updates.</li>
+            <li><strong>Status:</strong> <span class="badge watchlist">Watchlist</span></li>
+          </ul>
+        </article>
+        <article class="opp-card">
+          <h4>30 Broad St &ndash; Condo 2/1</h4>
+          <ul>
+          <li><strong>Price:</strong> $230k</li>
+          <li><strong>Estimated rent:</strong> $2,000/mo</li>
+          <li><strong>NOI:</strong> $12,600</li>
+            <li><strong>Entry cap:</strong> 4.0%</li>
+            <li><strong>Stabilised cap:</strong> 6.0%</li>
+            <li><strong>Notes:</strong> Historic building; significant upgrades likely.</li>
+            <li><strong>Status:</strong> <span class="badge watchlist">Watchlist</span></li>
+          </ul>
+        </article>
+      </div>
+      <h3>Creative / ADU &amp; Unconventional</h3>
+      <div class="opportunity-list">
+        <article class="opp-card">
+          <h4>111 Howe St &ndash; SF 4/2</h4>
+          <ul>
+          <li><strong>Price:</strong> $450k</li>
+          <li><strong>Estimated rent:</strong> $3,500/mo</li>
+          <li><strong>NOI:</strong> $29,400</li>
+            <li><strong>Entry cap:</strong> 6.5%</li>
+            <li><strong>Stabilised cap:</strong> 7.0%</li>
+            <li><strong>Notes:</strong> Basement has ADU potential.</li>
+            <li><strong>Status:</strong> <span class="badge watchlist">Watchlist</span></li>
+          </ul>
+        </article>
+      </div>
+      <h3>Small Multi‑Family</h3>
+      <p>No qualifying listings at this time. <em>Upload refreshed MLS data to update this section.</em></p>
+      <h3>Development / Redevelopment</h3>
+      <p>No qualifying projects at this time. <em>Upload refreshed MLS data to update this section.</em></p>
+      <h3>Core Buy‑and‑Hold</h3>
+      <p>No qualifying listings at this time. <em>Upload refreshed MLS data to update this section.</em></p>
+    </section>
+    <!-- Assumptions -->
+    <section id="assumptions" class="section">
+      <h2>Assumptions</h2>
+      <p>These are the baseline inputs used for underwriting. Adjust them to reflect your outlook or to stress‑test deals.</p>
+      <h3>Rent Estimates</h3>
+      <!-- Present rent assumptions in a table so categories sit on the left and profiles across the top -->
+      <div class="rent-table-wrapper">
+        <table class="rent-table">
+          <thead>
+            <tr>
+              <th>Bedrooms</th>
+              <th>Conservative</th>
+              <th>Moderate</th>
+              <th>Aggressive</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Studio</th>
+              <td>$1,100</td>
+              <td>$1,400</td>
+              <td>$1,740</td>
+            </tr>
+            <tr>
+              <th>1‑Bedroom</th>
+              <td>$1,600</td>
+              <td>$1,900</td>
+              <td>$2,000</td>
+            </tr>
+            <tr>
+              <th>2‑Bedroom</th>
+              <td>$2,000</td>
+              <td>$2,400</td>
+              <td>$2,700</td>
+            </tr>
+            <tr>
+              <th>3‑Bedroom</th>
+              <td>$3,000</td>
+              <td>$3,300</td>
+              <td>$3,500</td>
+            </tr>
+            <tr>
+              <th>4‑Bedroom</th>
+              <td>$3,500</td>
+              <td>$4,300</td>
+              <td>$5,200</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Expenses &amp; Financing</h3>
+      <!-- Present expenses and financing assumptions in a simple table for clarity -->
+      <div class="expenses-table-wrapper">
+        <table class="expenses-table">
+          <tbody>
+            <tr>
+              <th>Vacancy</th>
+              <td>5% of gross rent</td>
+            </tr>
+            <tr>
+              <th>Operating Expenses</th>
+              <td>SF/Condo: 30–35%; Small MF: 38–45%</td>
+            </tr>
+            <tr>
+              <th>Property Tax</th>
+              <td>Residential: 0.986% of purchase price; Commercial/MF: 1.843% of purchase price</td>
+            </tr>
+            <tr>
+              <th>Financing</th>
+              <td>Interest rate: 6% (fixed); Loan‑to‑value: 65–70%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h3>Profile Comparison</h3>
+      <!-- A responsive comparison table that aligns metrics on the left and profiles across the top -->
+      <div class="profile-table-wrapper">
+        <table class="profile-table">
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Conservative</th>
+              <th>Balanced</th>
+              <th>Growth</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>Entry cap threshold</th>
+              <td>≥ 5.5% (SF/Condo), ≥ 6% (MF)</td>
+              <td>5–5.5% (SF/Condo), 5.5–6% (MF)</td>
+              <td>4.5–5% (SF/Condo), 5–5.5% (MF)</td>
+            </tr>
+            <tr>
+              <th>Expense ratio</th>
+              <td>30–35%</td>
+              <td>30–40%</td>
+              <td>35–45%</td>
+            </tr>
+            <tr>
+              <th>Rent growth</th>
+              <td>1–2%</td>
+              <td>2–3%</td>
+              <td>3–5%</td>
+            </tr>
+            <tr>
+              <th>Risk tolerance</th>
+              <td>Low</td>
+              <td>Moderate</td>
+              <td>High</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <!-- Off‑Market -->
+    <section id="offmarket" class="section">
+      <h2>Off‑Market Opportunity Engine</h2>
+      <p>Our off‑market pipeline identifies privately held properties aligned with each strategy by analysing public records and owner behaviour. It combines data and personalised outreach to unlock hidden deals.</p>
+      <h3>Core Buy‑and‑Hold</h3>
+      <ul class="off-market-list">
+        <li><strong>Profiles:</strong> long‑held single‑family homes owned by retirees or estates; absentee rentals with outdated rents.</li>
+        <li><strong>Identification:</strong> filter assessor data for 20+ year ownership, mailing‑address mismatch and low assessed values.</li>
+        <li><strong>Signals:</strong> trust or estate ownership; senior discounts on tax bills.</li>
+        <li><strong>Outreach:</strong> personalised letters offering flexible closing and sale–leaseback options.</li>
+      </ul>
+      <h3>Value‑Add / Renovation</h3>
+      <ul class="off-market-list">
+        <li><strong>Profiles:</strong> dated homes with deferred maintenance; properties with code violations or tax liens; probate estates.</li>
+        <li><strong>Identification:</strong> search permit and code‑violation records; look for tax delinquency; examine probate filings.</li>
+        <li><strong>Signals:</strong> long tenure without permits; outstanding liens; recent death notices.</li>
+        <li><strong>Outreach:</strong> postcards offering as‑is purchase and relief from repairs; letters to estate executors.</li>
+      </ul>
+      <h3>Small Multi‑Family</h3>
+      <ul class="off-market-list">
+        <li><strong>Profiles:</strong> two‑ to four‑unit buildings held by mom‑and‑pop landlords; owner‑occupied duplexes/triplexes; out‑of‑state investors.</li>
+        <li><strong>Identification:</strong> filter assessor data for property class codes; match mailing addresses; identify low assessed rents.</li>
+        <li><strong>Signals:</strong> vacant units; dissolved LLCs; outdated tenant affidavits.</li>
+        <li><strong>Outreach:</strong> professional letters highlighting management experience and offering confidential valuations.</li>
+      </ul>
+      <h3>Development / Redevelopment</h3>
+      <ul class="off-market-list">
+        <li><strong>Profiles:</strong> parcels ≥ 0.5 acres with small structures; under‑improved commercial/industrial sites; single‑family homes in multifamily zones.</li>
+        <li><strong>Identification:</strong> use GIS to find oversize lots; compare land vs building values; search for expired permits.</li>
+        <li><strong>Signals:</strong> high land taxes with vacant buildings; stalled projects; family trusts with uninterested heirs.</li>
+        <li><strong>Outreach:</strong> concise letters describing zoning potential and offering purchase or joint‑venture options.</li>
+      </ul>
+      <h3>Creative / ADU &amp; Unconventional</h3>
+      <ul class="off-market-list">
+        <li><strong>Profiles:</strong> homes with unfinished basements or detached garages; oversized lots; properties near transit (reduced parking requirements); older owners seeking income.</li>
+        <li><strong>Identification:</strong> map parcels within 0.5 mile of transit; identify small homes on large lots; look for accessory structures in assessor data.</li>
+        <li><strong>Signals:</strong> owners seeking to age in place; absence of recent mortgages; interest in zoning workshops.</li>
+        <li><strong>Outreach:</strong> educational brochures about ADU benefits; workshop invitations; design‑build partnership offers.</li>
+      </ul>
+    </section>
+    <!-- Research Library -->
+    <section id="research" class="section">
+      <h2>Research Library</h2>
+      <p>Our recommendations are backed by ten detailed analysis documents. Each summary below links to the full report (DOCX). These papers explain rental trends, cap‑rate environments, deal‑selection logic, sensitivity analyses, screening results, false‑positive audits, the final investment memo and app specifications.</p>
+      <div class="research-list">
+        <div class="research-item">
+          <h4>1. Rental Market Analysis</h4>
+          <p>Analyses MLS rental history and compares it with 2025–2026 market surveys (e.g., Zillow and RentCafe). Highlights time‑lag effects and differences in unit quality, and derives conservative, moderate and aggressive rent assumptions by bedroom count.</p>
+          <a href="docs/analysis1.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>2. Cap Rates &amp; Strategy Definitions</h4>
+          <p>Summarises typical cap‑rate ranges by property type and explains macro drivers such as interest rates, supply constraints, ADU legislation, tenant protections, property taxes and Marlborough’s economic strengths. Details each strategy’s buy box, capital requirements and risk profile.</p>
+          <a href="docs/analysis2.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>3. Cap‑Rate Spreads &amp; Risk‑Adjusted Returns</h4>
+          <p>Compares Marlborough cap rates with those in Boston (average ≈5.1%) and the MetroWest suburbs. Explores how cap rates interact with interest rates, financing constraints and exit liquidity, and maps strategies to their reliance on cap‑rate compression, forced appreciation or income yield.</p>
+          <a href="docs/analysis3.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>4. Deal Selection Logic</h4>
+          <p>Explains formulas for estimating NOI using rent, vacancy, taxes and expense assumptions, defines minimum entry cap rates for each strategy, and outlines screening filters for cap‑rate upside, rent growth potential and development optionality.</p>
+          <a href="docs/analysis4.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>5. Cap‑Rate Sensitivity Analysis</h4>
+          <p>Shows that strict cap‑rate thresholds yield very few qualifying deals and proposes broader entry bands (e.g., 4.5–5.5% for value‑add) to broaden the opportunity set while staying grounded in market realities.</p>
+          <a href="docs/analysis5.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>6. Balanced &amp; Growth Screening Results</h4>
+          <p>Lists the MLS listings that met the Balanced and Growth profiles. Balanced opportunities: 35 High St (value‑add) and 111 Howe St (creative/ADU). Growth additions: 102 Liberty St, 688 Boston Post Rd E and 30 Broad St.</p>
+          <a href="docs/analysis6.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>7. Consolidated Opportunity Set</h4>
+          <p>Merges the Balanced and Growth deals into a unified opportunity set, identifying 35 High St as the only recommended opportunity and placing the other properties on the watchlist due to HOA uncertainty, small lots or renovation risks.</p>
+          <a href="docs/analysis7.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>8. False Positive Audit</h4>
+          <p>Stress tests each deal with more realistic expenses and taxes, flags those that appear attractive only under optimistic assumptions, and confirms that 35 High St is the lone high‑confidence listing.</p>
+          <a href="docs/analysis8.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>9. Investment Memorandum</h4>
+          <p>Combines historic price and rent trends, regulatory context, cap‑rate dynamics and strategy analysis to conclude that value‑add and creative/ADU plays offer the best risk‑adjusted returns in Marlborough.</p>
+          <a href="docs/analysis9.docx" download>Download full document</a>
+        </div>
+        <div class="research-item">
+          <h4>10. App Specification</h4>
+          <p>Defines the web app’s page structure, data model, calculation logic and refresh pipeline, showing how uploaded MLS data updates opportunity tables and summarising table structures for future features.</p>
+          <a href="docs/analysis10.docx" download>Download full document</a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <footer>
+    <p>&copy; 2026 Marlborough Investor Platform. All rights reserved.</p>
+  </footer>
+  <!-- Scripts -->
+  <script src="scripts.js"></script>
+</body>
+</html>

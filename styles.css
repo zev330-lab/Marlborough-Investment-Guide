@@ -1,0 +1,426 @@
+/*
+ * Investor App Stylesheet
+ *
+ * This stylesheet defines the visual design for the Marlborough investor app.
+ * It uses a warm, neutral palette and simple layouts to present complex data
+ * in an approachable way. The navigation is responsive: on mobile it becomes
+ * a slide‑out menu to conserve screen space. Cards and grids organise
+ * information clearly across sections.
+ */
+
+/* Universal box‑sizing and base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background-color: #f8f5f0;
+  color: #333;
+  overflow-x: hidden;
+}
+
+/* Navigation bar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: #2a4d69;
+  color: #fff;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.navbar .brand {
+  display: flex;
+  align-items: center;
+}
+
+.navbar .logo {
+  width: 28px;
+  height: 28px;
+  margin-right: 0.5rem;
+}
+
+.navbar .brand span {
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.menu-toggle {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+/* Slide‑out side menu */
+.side-menu {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  width: 250px;
+  height: 100%;
+  background-color: #2a4d69;
+  color: #fff;
+  padding: 1rem;
+  transition: left 0.3s ease;
+  z-index: 999;
+}
+
+.side-menu.open {
+  left: 0;
+}
+
+.side-menu .close-menu {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-bottom: 1rem;
+}
+
+.side-menu .menu-link {
+  display: block;
+  padding: 0.75rem 0;
+  color: #fff;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 1rem;
+}
+
+.side-menu .menu-link:last-child {
+  border-bottom: none;
+}
+
+/* Hero section */
+.hero {
+  padding: 4rem 1rem 2rem;
+  text-align: center;
+  margin-top: 60px; /* offset for fixed nav */
+  background: linear-gradient(120deg, #f2e9e4, #f1faee);
+  color: #333;
+}
+
+.hero h1 {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  font-size: 1.1rem;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+main {
+  padding: 2rem 1rem;
+}
+
+/* Section visibility */
+.section {
+  display: none;
+  margin-bottom: 2rem;
+}
+
+.section.active {
+  display: block;
+}
+
+/* Charts */
+.charts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.charts img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Ranking list */
+.ranking {
+  margin-left: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.ranking li {
+  margin-bottom: 0.5rem;
+}
+
+/* Card components */
+.strategy-card,
+.opp-card,
+.research-item {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.strategy-card h3 {
+  margin-bottom: 0.5rem;
+  color: #2a4d69;
+}
+
+.strategy-card ul {
+  margin-left: 1.2rem;
+  margin-top: 0.5rem;
+}
+
+.strategy-card ul li {
+  margin-bottom: 0.3rem;
+}
+
+/* Opportunity cards */
+.opportunity-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.opp-card h4 {
+  color: #2a4d69;
+  margin-bottom: 0.5rem;
+}
+
+.opp-card ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.opp-card ul li {
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  color: #fff;
+}
+
+.badge.recommended {
+  background-color: #2a9d8f;
+}
+
+.badge.watchlist {
+  background-color: #e76f51;
+}
+
+/* Assumptions */
+.assumption-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.assumption-col {
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.assumption-col h4 {
+  margin-bottom: 0.3rem;
+  font-size: 1rem;
+  color: #2a4d69;
+}
+
+.assumption-col p {
+  font-size: 0.9rem;
+}
+
+/* Profile comparison table */
+/* Profile comparison table */
+.profile-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.profile-table th,
+.profile-table td {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  word-wrap: break-word;
+}
+
+.profile-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #2a4d69;
+}
+
+/* Emphasise the left metric column to improve readability */
+.profile-table tbody th {
+  background-color: #f2e9e4;
+  font-weight: 600;
+  color: #2a4d69;
+  text-align: left;
+  width: 30%;
+}
+
+@media (max-width: 768px) {
+  /* Wrap table cells on mobile */
+  .profile-table th,
+  .profile-table td {
+    font-size: 0.8rem;
+  }
+}
+
+/* Research library */
+.research-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.research-item h4 {
+  margin-bottom: 0.3rem;
+  color: #2a4d69;
+}
+
+.research-item p {
+  font-size: 0.9rem;
+  margin-bottom: 0.3rem;
+}
+
+.research-item a {
+  font-size: 0.85rem;
+  color: #2a9d8f;
+  text-decoration: none;
+}
+
+.research-item a:hover {
+  text-decoration: underline;
+}
+
+/* Off‑market lists */
+.off-market-list {
+  /* Reduce indentation on mobile for better readability */
+  margin-left: 1.2rem;
+  margin-bottom: 1rem;
+  list-style: disc;
+}
+
+.off-market-list li {
+  margin-bottom: 0.4rem;
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+/* Rent and expenses tables */
+.rent-table-wrapper,
+.expenses-table-wrapper {
+  overflow-x: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.rent-table,
+.expenses-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.rent-table th,
+.rent-table td,
+.expenses-table th,
+.expenses-table td {
+  padding: 0.6rem;
+  border: 1px solid #ccc;
+  font-size: 0.85rem;
+  word-wrap: break-word;
+}
+
+.rent-table th,
+.expenses-table th {
+  background-color: #f7f7f7;
+  font-weight: 600;
+  color: #2a4d69;
+}
+
+.rent-table tbody th,
+.expenses-table tbody th {
+  background-color: #f2e9e4;
+  font-weight: 600;
+  color: #2a4d69;
+  text-align: left;
+}
+
+@media (max-width: 768px) {
+  .rent-table th,
+  .rent-table td,
+  .expenses-table th,
+  .expenses-table td {
+    font-size: 0.8rem;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: #777;
+  background-color: #f2e9e4;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .navbar .brand span {
+    font-size: 1rem;
+  }
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+  .hero p {
+    font-size: 0.95rem;
+  }
+  .profile-grid {
+    display: block;
+  }
+  .profile-header,
+  .profile-cell {
+    border-right: none;
+    border-bottom: 1px solid #ccc;
+  }
+  .assumption-grid {
+    /* On small screens, stack assumption cards vertically to avoid cramped columns */
+    grid-template-columns: 1fr;
+  }
+  .opportunity-list {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
