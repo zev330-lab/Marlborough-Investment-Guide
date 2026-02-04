@@ -9,21 +9,24 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Navigation bar with brand and links -->
+  <!-- Navigation bar with brand and menu toggle -->
   <nav class="navbar">
     <div class="brand">
       <img src="icon.png" alt="Logo" class="logo">
       <span>Marlborough Investor</span>
     </div>
-    <div class="nav-links">
-      <a href="#dashboard" class="nav-link">Dashboard</a>
-      <a href="#strategies" class="nav-link">Strategies</a>
-      <a href="#opportunities" class="nav-link">Opportunities</a>
-      <a href="#assumptions" class="nav-link">Assumptions</a>
-      <a href="#offmarket" class="nav-link">Off‑Market</a>
-      <a href="#research" class="nav-link">Research</a>
-    </div>
+    <button class="menu-toggle" aria-label="Open menu">☰</button>
   </nav>
+  <!-- Slide‑out menu for mobile -->
+  <aside class="side-menu" id="sideMenu">
+    <button class="close-menu" aria-label="Close menu">&times;</button>
+    <a href="#dashboard" class="menu-link">Dashboard</a>
+    <a href="#strategies" class="menu-link">Strategies</a>
+    <a href="#opportunities" class="menu-link">Opportunities</a>
+    <a href="#assumptions" class="menu-link">Assumptions</a>
+    <a href="#offmarket" class="menu-link">Off‑Market</a>
+    <a href="#research" class="menu-link">Research</a>
+  </aside>
   <!-- Hero section -->
   <header class="hero">
     <h1>Invest Smarter in Marlborough</h1>
