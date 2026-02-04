@@ -39,4 +39,25 @@ document.addEventListener('DOMContentLoaded', function () {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   });
+
+  // Activate section based on URL hash on initial load. This ensures that
+  // when users return from a research document via a hash (e.g., #research),
+  // the corresponding section is displayed instead of defaulting to the dashboard.
+  const initialHash = window.location.hash;
+  if (initialHash) {
+    const targetId = initialHash.substring(1);
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      // Hide all sections
+      document.querySelectorAll('.section').forEach((section) => {
+        section.classList.remove('active');
+      });
+      // Show the target section
+      targetSection.classList.add('active');
+      // Scroll to the target section so it is visible on load when returning
+      // from a document page. Without scrolling, users may land at the top
+      // of the page and think they are on the dashboard.
+      targetSection.scrollIntoView({ behavior: 'auto', block: 'start' });
+    }
+  }
 });
