@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>analysis1</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="marlborough-ma-rental-market-analysis-2026">Marlborough, MA
+Rental Market Analysis (2026)</h1>
+<h2 id="introduction">Introduction</h2>
+<p>Evaluating rental properties in Marlborough, Massachusetts requires a
+clear picture of what tenants actually pay today and how those rents
+vary by housing type. The MLS data you provided contain 591 rental
+listings covering 2019–2024 and show what investors achieved
+historically, but those values lag the current market because many new
+developments have delivered since 2024. To produce realistic
+underwriting assumptions for 2026, this analysis combines the MLS rental
+history with current market data from multiple independent
+sources—Zillow, RentCafe, Rent.com, Realtor.com and Rentometer—and then
+constructs conservative, moderate and aggressive rent assumptions by
+bedroom count and property type.</p>
+<h2 id="mls-rental-history">MLS rental history</h2>
+<p>The MLS data include 591 rental listings from 2019–2024. After
+cleaning and standardising the data, each record was assigned a
+<strong>RENT</strong> value (the monthly rent from the sold or list
+price) and a numeric <strong>BEDS</strong> count. When plotted by
+bedroom count, the MLS distribution shows that Marlborough historically
+offered affordable rents compared with 2026 asking rents. The table
+below summarises key statistics by bedroom count:</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bedroom count</th>
+<th>Sample size</th>
+<th>Min</th>
+<th>25th percentile</th>
+<th>Median (MLS)</th>
+<th>75th percentile</th>
+<th>Max</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Studio (0 bed)</strong></td>
+<td>40</td>
+<td>\$800</td>
+<td>\$895</td>
+<td><strong>\$1,097.50</strong></td>
+<td>\$1,250</td>
+<td>\$2,900</td>
+<td>Mostly older apartment buildings; smallest sample size.</td>
+</tr>
+<tr class="even">
+<td><strong>1 bedroom</strong></td>
+<td>133</td>
+<td>\$900</td>
+<td>\$1,450</td>
+<td><strong>\$1,600</strong></td>
+<td>\$1,800</td>
+<td>\$2,700</td>
+<td>Typical one‑bedroom apartments.</td>
+</tr>
+<tr class="odd">
+<td><strong>2 bedrooms</strong></td>
+<td>216</td>
+<td>\$1,350</td>
+<td>\$1,800</td>
+<td><strong>\$2,000</strong></td>
+<td>\$2,400</td>
+<td>\$3,400</td>
+<td>Includes apartments and duplex units.</td>
+</tr>
+<tr class="even">
+<td><strong>3 bedrooms</strong></td>
+<td>129</td>
+<td>\$1,500</td>
+<td>\$2,600</td>
+<td><strong>\$2,995</strong></td>
+<td>\$3,400</td>
+<td>\$5,000</td>
+<td>Mix of small houses and large apartments.</td>
+</tr>
+<tr class="odd">
+<td><strong>4 bedrooms</strong></td>
+<td>57</td>
+<td>\$2,200</td>
+<td>\$2,900</td>
+<td><strong>\$3,500</strong></td>
+<td>\$4,000</td>
+<td>\$10,000</td>
+<td>Larger single‑family rentals; one luxury outlier at \$10 k.</td>
+</tr>
+<tr class="even">
+<td><strong>5 bedrooms</strong></td>
+<td>14</td>
+<td>\$2,800</td>
+<td>\$3,950</td>
+<td><strong>\$4,825</strong></td>
+<td>\$6,000</td>
+<td>\$8,000</td>
+<td>Rare and mostly single‑family houses.</td>
+</tr>
+</tbody>
+</table>
+<p>To differentiate apartments from single‑family homes within the
+rental data, we grouped properties with <strong>3 bedrooms or
+more</strong> as “houses” and those with <strong>2 bedrooms or
+fewer</strong> as “apartments.” Under this simple classification,
+apartments (389 records) had a median rent of \$1,800, while houses (202
+records) had a median rent of \$3,200. This split illustrates the
+premium tenants pay for larger detached homes relative to smaller
+apartment units.</p>
+<h2 id="external-rental-data-sources">External rental data sources</h2>
+<p>Several industry sources provide current asking rents for Marlborough
+as of early 2026:</p>
+<ol type="1">
+<li><p><strong>Zillow</strong> – Zillow’s rental market summary
+(31 January 2026) reports that the average rent for all bedrooms and all
+property types is <strong>\$2,400</strong> and that houses rent between
+<strong>\$892 and \$6,900</strong> with an average of \$2,400<a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[1]</a>.
+It lists average rents by bedroom: <strong>\$1,744 for studios</strong>,
+<strong>\$1,984 for 1‑bedroom units</strong>, <strong>\$2,400 for
+2‑bedroom units</strong>, <strong>\$2,859 for 3‑bedroom units</strong>
+and <strong>\$5,200 for 4‑bedroom units</strong><a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[2]</a>.</p></li>
+<li><p><strong>RentCafe</strong> – Yardi’s RentCafe platform
+(18 January 2026) shows an average apartment rent of
+<strong>\$2,549</strong>, up 3.8 % year‑over‑year<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[3]</a>.
+It details unit sizes and rents: studios average
+<strong>\$1,525</strong> for 406 sq ft; 1‑bedroom apartments average
+<strong>\$2,357</strong> for 774 sq ft; 2‑bedroom apartments average
+<strong>\$2,686</strong> for 1,066 sq ft; and 3‑bedroom apartments
+average <strong>\$3,505</strong> for 1,411 sq ft<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[3]</a>.
+RentCafe notes that 42 % of Marlborough rentals fall between
+<strong>\$2,001 and \$2,500</strong><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20largest%20share%20of%20rentals,suitable%20apartments%20within%20this%20price">[4]</a>.</p></li>
+<li><p><strong>Rent.com</strong> – Rent.com’s trend report
+(1 February 2026) lists average rents of <strong>\$1,979</strong> for
+studio apartments, <strong>\$2,840</strong> for one‑bedroom apartments
+and <strong>\$3,201</strong> for two‑bedroom apartments<a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Average%20Rent%20in%20Marlborough%2C%20MA">[5]</a>.
+Its data show that 88 % of Marlborough apartments rent for more than
+\$2,100 per month<a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Apartment%20Rent%20Ranges%20in%20Marlborough%2C,MA">[6]</a>.</p></li>
+<li><p><strong>Rentometer</strong> – Rentometer provides a breakdown by
+bedroom count using actual rent comparables. In early 2026, it reports
+average and median rents along with range statistics. Studio apartments
+average <strong>\$1,904</strong> and have a median of
+<strong>\$1,929</strong>, with the middle 50 % of rents falling between
+<strong>\$1,750 and \$2,480</strong><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+One‑bedroom apartments average <strong>\$2,499</strong> (median
+<strong>\$2,562</strong>), with the 25th–75th percentile range
+<strong>\$2,144–\$2,850</strong><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+Two‑bedroom units average <strong>\$3,128</strong> (median
+<strong>\$3,212</strong>) with a 25th–75th percentile range
+<strong>\$2,735–\$3,528</strong><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+Three‑bedroom apartments average <strong>\$3,953</strong> (median
+<strong>\$4,096</strong>) and typically rent between <strong>\$3,500 and
+\$4,494</strong><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[8]</a>.
+The Rentometer narrative notes that studios “sit in the \$1,900s” and
+three‑bedroom units “approach the \$4,100 tier”<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Marlborough%E2%80%99s%20rental%20market%20offers%20a,of%20price%20points%20reflects%20the">[9]</a>.</p></li>
+<li><p><strong>Realtor.com</strong> – Realtor.com’s market snapshot
+(November 2025) reports that Marlborough has a <strong>median rent of
+\$2,441 per month</strong><a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough#:~:text=Median%20rent%20%242%2C441%2Fmo%200.43%25%20">[10]</a>.
+It also highlights variations across neighbourhoods: Downtown
+Marlborough’s median rent is \$1,975, Marlborough Junction’s is \$2,300
+and French Hill’s is \$1,800<a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough#:~:text=Neighborhood%20Median%20home%20price%20Listing,104%20%24491%2C000%20%24326%20%243%2C133%20%2Fmo">[11]</a>.</p></li>
+</ol>
+<p>These sources all show 2025–2026 asking rents substantially above the
+MLS medians, reflecting both rising rents and the delivery of new luxury
+apartment communities that command premium pricing.</p>
+<h2 id="comparing-mls-history-with-external-data">Comparing MLS history
+with external data</h2>
+<p>The MLS and external data sets tell different stories about
+Marlborough’s rental market. When comparing the MLS medians to the
+average medians from external sources (Zillow, RentCafe, Rent.com and
+Rentometer), rents appear to have risen sharply since 2019:</p>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bedroom</th>
+<th>MLS median (2019‑24)</th>
+<th>Average of external medians (2025‑26)</th>
+<th>Difference</th>
+<th>Percent increase</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Studio</strong></td>
+<td>\$1,097.50</td>
+<td>~\$1,794</td>
+<td>+\$696</td>
+<td><strong>≈64 % higher</strong></td>
+</tr>
+<tr class="even">
+<td><strong>1 bedroom</strong></td>
+<td>\$1,600</td>
+<td>~\$2,436</td>
+<td>+\$836</td>
+<td><strong>≈52 % higher</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>2 bedrooms</strong></td>
+<td>\$2,000</td>
+<td>~\$2,875</td>
+<td>+\$875</td>
+<td><strong>≈44 % higher</strong></td>
+</tr>
+<tr class="even">
+<td><strong>3 bedrooms</strong></td>
+<td>\$2,995</td>
+<td>~\$3,487</td>
+<td>+\$492</td>
+<td><strong>≈16 % higher</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>4 bedrooms</strong></td>
+<td>\$3,500</td>
+<td>\$5,200 (Zillow)</td>
+<td>+\$1,700</td>
+<td><strong>≈49 % higher</strong></td>
+</tr>
+</tbody>
+</table>
+<p>The smaller gap for three‑bedroom units suggests that larger homes
+were already commanding higher rents in 2019–2024, whereas smaller units
+have experienced steeper increases. Several factors explain these
+discrepancies:</p>
+<ul>
+<li><strong>Time lag and sample composition</strong> – MLS records cover
+multiple economic cycles, including the pandemic‑era slowdown, and
+include many mom‑and‑pop rentals, whereas current market surveys capture
+only recent listing activity. New apartment complexes, such as Alta
+Marlborough and Green District phases 3–4, have delivered hundreds of
+modern units at higher price points.</li>
+<li><strong>Unit quality and amenities</strong> – Many MLS rentals are
+older apartments or single‑family homes with basic finishes. External
+sources rely heavily on professionally managed apartment buildings that
+offer amenities like fitness centres, parking garages and on‑site
+management, which command higher rents.</li>
+<li><strong>Demand drivers</strong> – Growth in life‑science and
+technology employment (Sartorius, Moderna, Cytiva and other employers)
+has attracted higher‑income renters and increased competition for
+well‑located units, pushing asking rents upward.</li>
+</ul>
+<h2 id="rent-range-estimates-for-underwriting">Rent range estimates for
+underwriting</h2>
+<p>To support investment underwriting, the following tables present
+<strong>conservative</strong>, <strong>moderate</strong> and
+<strong>aggressive</strong> rent assumptions by bedroom count. The
+conservative figures rely on MLS medians and lower quartiles to reflect
+older or less‑renovated units. Moderate estimates are the midpoint
+between the MLS median and the average external median. Aggressive
+figures correspond to the upper quartile or high‑end averages from
+Rentometer, Rent.com and Zillow, reflecting new luxury inventory.</p>
+<h3 id="apartments-studios2-bedrooms">Apartments (studios–2
+bedrooms)</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bedroom</th>
+<th>Conservative rent (older units)</th>
+<th>Moderate rent (mid‑range)</th>
+<th>Aggressive rent (new/luxury)</th>
+<th>Evidence/justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Studio</strong></td>
+<td><strong>\$1,200</strong></td>
+<td>~\$1,446 (midpoint of MLS and external medians)</td>
+<td><strong>\$2,300</strong></td>
+<td>MLS studios had a median of \$1,097 and 75th percentile \$1,250.
+External sources put studio rents at \$1,525–\$1,979<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[3]</a><a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Average%20Rent%20in%20Marlborough%2C%20MA">[5]</a>
+and Rentometer’s upper quartile is \$2,480<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+A conservative underwrite uses ~\$1.2 k, while a luxury new‑build could
+achieve ~$2.3 k.</td>
+</tr>
+<tr class="even">
+<td><strong>1 bed</strong></td>
+<td><strong>\$1,600</strong></td>
+<td>~\$2,018</td>
+<td><strong>\$2,850</strong></td>
+<td>MLS median \$1,600 with upper quartile \$1,800; external medians
+range \$1,984–\$2,840<a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[2]</a><a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Average%20Rent%20in%20Marlborough%2C%20MA">[5]</a>.
+Rentometer’s 75th percentile is \$2,850<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+Moderate assumptions centre around \$2,018.</td>
+</tr>
+<tr class="odd">
+<td><strong>2 bed</strong></td>
+<td><strong>\$2,000</strong></td>
+<td>~\$2,437</td>
+<td><strong>\$3,300</strong></td>
+<td>MLS median \$2,000 with upper quartile \$2,400; external medians
+average \$2,875 and Rentometer’s 25th–75th range is \$2,735–\$3,528<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>.
+Aggressive rents for new apartments can reach \$3,300.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="houses-and-large-apartments-35-bedrooms">Houses and large
+apartments (3–5 bedrooms)</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Bedroom</th>
+<th>Conservative rent (older units)</th>
+<th>Moderate rent</th>
+<th>Aggressive rent</th>
+<th>Evidence/justification</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>3 bed</strong></td>
+<td><strong>\$2,900</strong></td>
+<td>~\$3,241</td>
+<td><strong>\$4,500</strong></td>
+<td>MLS median is \$2,995 and 75th percentile \$3,400. External medians
+average \$3,487 (Zillow, RentCafe, Rentometer), with Rentometer’s 75th
+percentile at \$4,494<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[8]</a>.
+Aggressive rents above \$4.5 k reflect large, new townhomes or renovated
+single‑family homes.</td>
+</tr>
+<tr class="even">
+<td><strong>4 bed</strong></td>
+<td><strong>\$3,500</strong></td>
+<td>~\$4,350</td>
+<td><strong>\$5,200</strong></td>
+<td>MLS median \$3,500; Zillow reports an average of \$5,200<a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[2]</a>.
+Moderate assumption uses midpoint (~\$4.35 k); aggressive assumption
+matches current high‑end listings.</td>
+</tr>
+<tr class="odd">
+<td><strong>5 bed</strong></td>
+<td><strong>\$4,500</strong></td>
+<td><strong>\$5,000</strong></td>
+<td><strong>\$6,000</strong></td>
+<td>MLS median is \$4,825, but sample size is small. Conservatively,
+round down to \$4.5 k; moderate uses \$5.0 k; aggressive assumption of
+\$6 k reflects large luxury homes or furnished rentals.</td>
+</tr>
+</tbody>
+</table>
+<p>These ranges provide starting points for pro‑forma underwriting.
+Investors should adjust them based on unit condition, location (e.g.,
+Downtown Marlborough vs French Hill), amenities, inclusion of utilities,
+and local competition. For example, the MLS median for a three‑bedroom
+house (\$2,995) is appropriate for an older colonial without central
+air, whereas a brand‑new townhouse near the Assabet River Rail Trail
+could achieve \$4,000–\$4,500.</p>
+<h2 id="implications-for-investment-strategy">Implications for
+investment strategy</h2>
+<ol type="1">
+<li><strong>Focus on value‑add apartments</strong> – Because new luxury
+buildings are commanding high rents, repositioning existing one‑ and
+two‑bedroom apartments could close the gap between the MLS medians and
+current market rates. Renovations that add in‑unit laundry,
+air‑conditioning, and modern finishes may justify rents in the
+\$2,400–\$2,600 range.</li>
+<li><strong>Consider single‑family rentals as yield plays</strong> –
+Single‑family homes have fewer comparable data points but command higher
+rents per unit. Investors can target 3‑ to 4‑bedroom houses, where
+moderate assumptions of \$3,200–\$4,300 still undercut new build rents
+and provide room for appreciation.</li>
+<li><strong>Understand neighborhood dynamics</strong> – Realtor.com
+shows median rents ranging from \$1,800 in French Hill to \$2,845 in the
+Nobscot area<a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough#:~:text=Neighborhood%20Median%20home%20price%20Listing,104%20%24491%2C000%20%24326%20%243%2C133%20%2Fmo">[11]</a>.
+Properties near life‑science employers and retail corridors are likely
+to achieve higher aggressive rents, while outlying neighborhoods may
+align with conservative assumptions.</li>
+<li><strong>Monitor regulatory changes</strong> – Massachusetts is
+considering rent‑stabilization measures and already imposes strict rules
+on security deposits and eviction timelines; these factors could cap
+rent growth and influence strategy. Maintaining conservative
+underwriting assumptions provides a cushion if policy shifts limit
+future increases.</li>
+</ol>
+<h2 id="conclusion">Conclusion</h2>
+<p>By integrating historical MLS data with up‑to‑date rental market
+surveys, this research illustrates how rents in Marlborough have moved
+from sub‑\$2,000 levels for small units to above \$2,500 for modern
+one‑bedroom apartments in just a few years. Rents for three‑ and
+four‑bedroom houses now routinely exceed \$3,500, reflecting both scarce
+supply and growing demand from professionals employed at nearby
+life‑science and technology companies. The conservative, moderate and
+aggressive rent assumptions presented here give investors a framework
+for underwriting acquisitions and redevelopment projects. Actual rent
+targets should be refined based on unit quality, location and regulatory
+developments, but these ranges demonstrate the significant upside
+potential relative to historical benchmarks.</p>
+<p><a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[1]</a>
+<a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/#:~:text=2,studio%20apartment%20in%20Marlborough%2C%20MA">[2]</a>
+Average Rental Price in Marlborough, MA | $2,400</p>
+<p><a
+href="https://www.zillow.com/rental-manager/market-trends/marlborough-ma/">https://www.zillow.com/rental-manager/market-trends/marlborough-ma/</a></p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[3]</a>
+<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20largest%20share%20of%20rentals,suitable%20apartments%20within%20this%20price">[4]</a>
+Average Rent in Marlborough, MA: 2026 Rent Prices by Neighborhood</p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/">https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/</a></p>
+<p><a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Average%20Rent%20in%20Marlborough%2C%20MA">[5]</a>
+<a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends#:~:text=Apartment%20Rent%20Ranges%20in%20Marlborough%2C,MA">[6]</a>
+Rental Market Trends &amp; Average Rent in Marlborough, MA | Rent.</p>
+<p><a
+href="https://www.rent.com/massachusetts/marlborough-apartments/rent-trends">https://www.rent.com/massachusetts/marlborough-apartments/rent-trends</a></p>
+<p><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[7]</a>
+<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Property%20Type%20Bedrooms%20Average%20Median,%244%2C494">[8]</a>
+<a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma#:~:text=Marlborough%E2%80%99s%20rental%20market%20offers%20a,of%20price%20points%20reflects%20the">[9]</a>
+Rentometer: Average Rent in Marlborough, MA</p>
+<p><a
+href="https://www.rentometer.com/average-rent-in/ma/marlborough-ma">https://www.rentometer.com/average-rent-in/ma/marlborough-ma</a></p>
+<p><a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough#:~:text=Median%20rent%20%242%2C441%2Fmo%200.43%25%20">[10]</a>
+<a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough#:~:text=Neighborhood%20Median%20home%20price%20Listing,104%20%24491%2C000%20%24326%20%243%2C133%20%2Fmo">[11]</a>
+Marlborough, MA Housing Market &amp; Rental trends - Home Prices, Rent,
+Inventory &amp; More | realtor.com®</p>
+<p><a
+href="https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough">https://www.realtor.com/local/market/massachusetts/middlesex-county/marlborough</a></p>
+</body>
+</html>

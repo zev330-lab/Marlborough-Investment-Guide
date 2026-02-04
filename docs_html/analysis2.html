@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>analysis2</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1
+id="investorfacing-app-specification-for-marlborough-realestate-analysis">Investor‑Facing
+App Specification for Marlborough Real‑Estate Analysis</h1>
+<h2 id="overview">Overview</h2>
+<p>This specification describes a web‑based application that delivers
+data‑driven real‑estate insights for investors targeting Marlborough,
+Massachusetts. Each investment strategy is represented as a top‑level
+tab, and tabs include real‑time screening of MLS data, optionality
+analysis and off‑market leads. The system ingests updated MLS exports,
+cleans and enriches the data, computes financial metrics and classifies
+opportunities according to pre‑defined strategy profiles (core
+buy‑and‑hold, value‑add/renovation, small multi‑family income,
+development/redevelopment and creative/ADU). Users can review
+recommended deals, watchlist items and optionality plays, adjust
+underwriting assumptions, and explore an off‑market pipeline.</p>
+<h2 id="app-sitemap">1 App Sitemap</h2>
+<p>The app is organised by strategy tabs, each containing consistent
+sub‑sections:</p>
+<ol type="1">
+<li><p><strong>Dashboard (Home)</strong> – high‑level market summary:
+recent price and rent trends, cap‑rate landscape, distribution of
+listings by strategy, and last data refresh timestamp.</p></li>
+<li><p><strong>Core Buy‑and‑Hold</strong></p></li>
+<li><em>Recommended Deals</em> – table of properties meeting
+conservative cap‑rate and risk criteria.</li>
+<li><em>Watchlist</em> – properties that nearly qualify but need
+verification (e.g., HOA fees, condition).</li>
+<li><em>Optionality</em> – single‑family properties with large lots or
+in‑law potential that could be repositioned into buy‑and‑hold assets
+after conversion.</li>
+<li><em>Assumptions &amp; Risks</em> – rent and expense assumptions, tax
+rates, financing terms, and risk checklist.</li>
+<li><p><em>Off‑Market Pipeline</em> – description of target owner
+profiles, search filters and outreach plan for sourcing non‑listed
+buy‑and‑hold homes.</p></li>
+<li><p><strong>Value‑Add / Renovation</strong> (Balanced &amp; Growth
+profiles supported)</p></li>
+<li><em>Recommended Deals</em> – top MLS listings with entry cap rate
+≥ balanced threshold and clear renovation upside.</li>
+<li><em>Watchlist</em> – candidate deals with lower entry cap or unknown
+costs but potential to qualify.</li>
+<li><em>Optionality</em> – houses with ADU/in‑law conversion potential
+or mispriced estate sales offering renovation upside.</li>
+<li><em>Assumptions &amp; Risks</em> – renovation cost assumptions, rent
+uplift, expense ratio, financing details; risk factors such as permit
+requirements or structural issues.</li>
+<li><p><em>Off‑Market Pipeline</em> – outlines how to identify dated
+homes (e.g., code‑violation lists, long tenure) and contact
+owners.</p></li>
+<li><p><strong>Small Multi‑Family Income</strong></p></li>
+<li><em>Recommended Deals</em> – 2‑ to 4‑unit properties with entry cap
+rates ≥ 5.5 % and stable rent potential.</li>
+<li><em>Watchlist</em> – multifamily listings requiring additional due
+diligence on rents, condition or permits.</li>
+<li><em>Optionality</em> – multi‑family assets flagged for possible unit
+expansion or ADU addition (e.g., large lots, basements).</li>
+<li><em>Assumptions &amp; Risks</em> – multi‑family rent, expenses, tax
+treatment, vacancy, and financing assumptions; risk checklist (tenant
+turnover, code compliance).</li>
+<li><p><em>Off‑Market Pipeline</em> – describes patterns to target
+absentee landlords and long‑held duplexes/triplexes using public
+records.</p></li>
+<li><p><strong>Development / Redevelopment</strong></p></li>
+<li><em>Recommended Projects</em> – large lots or under‑improved sites
+with clear subdivision or redevelopment potential and projected returns
+&gt; 15 % IRR.</li>
+<li><em>Watchlist</em> – parcels requiring significant zoning or
+environmental due diligence before proceeding.</li>
+<li><em>Optionality</em> – residential lots meeting minimum frontage and
+size requirements for conversion into two units or cluster
+developments.</li>
+<li><em>Assumptions &amp; Risks</em> – construction costs, permit
+timelines, regulatory hurdles, exit pricing, financing terms.</li>
+<li><p><em>Off‑Market Pipeline</em> – filters to find under‑improved
+land via assessor data and GIS overlays; outreach guidelines.</p></li>
+<li><p><strong>Creative / ADU / Unconventional</strong></p></li>
+<li><em>Recommended Projects</em> – properties where adding an accessory
+dwelling unit yields ≥ 8 % stabilised cap rate.</li>
+<li><em>Watchlist</em> – assets requiring confirmation of ADU
+feasibility (e.g., sewer capacity, separate entrance, parking).</li>
+<li><em>Optionality</em> – homes with large yards, unfinished basements
+or carriage houses flagged via text analysis.</li>
+<li><em>Assumptions &amp; Risks</em> – ADU construction costs, rent
+assumptions, parking requirements, zoning compliance, and financing
+details.</li>
+<li><p><em>Off‑Market Pipeline</em> – identifies owner‑occupied homes
+near transit with oversized lots and long tenure; provides outreach
+scripts for ADU education.</p></li>
+<li><p><strong>Data Upload &amp; Settings</strong> – interface for
+uploading new MLS data files, adjusting global assumptions (rent curves,
+vacancy rates, expense ratios, tax rates, financing terms) and viewing
+import history.</p></li>
+</ol>
+<h2 id="data-model">2 Data Model</h2>
+<p>The backend database maintains several normalized tables to support
+computation and display:</p>
+<h3 id="mlslistings">2.1 <code>MLSListings</code></h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>id</code></td>
+<td>Primary Key</td>
+<td>Unique identifier in the app database.</td>
+</tr>
+<tr class="even">
+<td><code>mls_num</code></td>
+<td>String</td>
+<td>MLS listing number.</td>
+</tr>
+<tr class="odd">
+<td><code>address</code></td>
+<td>String</td>
+<td>Street address.</td>
+</tr>
+<tr class="even">
+<td><code>city</code>, <code>state</code>, <code>zip</code></td>
+<td>String</td>
+<td>Location fields.</td>
+</tr>
+<tr class="odd">
+<td><code>property_type</code></td>
+<td>Enum</td>
+<td>Raw MLS property type (SF, MF, CC, RN).</td>
+</tr>
+<tr class="even">
+<td><code>list_price</code></td>
+<td>Numeric</td>
+<td>Asking price.</td>
+</tr>
+<tr class="odd">
+<td><code>beds</code></td>
+<td>Integer</td>
+<td>Bedrooms.</td>
+</tr>
+<tr class="even">
+<td><code>baths</code></td>
+<td>Numeric</td>
+<td>Bathrooms.</td>
+</tr>
+<tr class="odd">
+<td><code>sqft</code></td>
+<td>Numeric</td>
+<td>Living area in square feet.</td>
+</tr>
+<tr class="even">
+<td><code>lot_size_raw</code></td>
+<td>String</td>
+<td>Original lot size text from MLS (for parsing).</td>
+</tr>
+<tr class="odd">
+<td><code>lot_acres</code></td>
+<td>Numeric</td>
+<td>Computed lot size in acres.</td>
+</tr>
+<tr class="even">
+<td><code>list_date</code></td>
+<td>Date</td>
+<td>Date listed.</td>
+</tr>
+<tr class="odd">
+<td><code>sale_date</code></td>
+<td>Date</td>
+<td>Sale close date (if sold).</td>
+</tr>
+<tr class="even">
+<td><code>status</code></td>
+<td>Enum</td>
+<td>Standardised status (ACT, UAG, SLD, CAN, EXP).</td>
+</tr>
+<tr class="odd">
+<td><code>year_built</code></td>
+<td>Integer</td>
+<td>Built year.</td>
+</tr>
+<tr class="even">
+<td><code>remarks</code></td>
+<td>Text</td>
+<td>MLS remarks/description.</td>
+</tr>
+<tr class="odd">
+<td><code>source_file</code></td>
+<td>String</td>
+<td>Name of uploaded file for traceability.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="derivedmetrics">2.2 <code>DerivedMetrics</code></h3>
+<p>Stores calculations tied to each listing.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>listing_id</code></td>
+<td>Foreign Key to <code>MLSListings</code></td>
+<td>Identifies the listing.</td>
+</tr>
+<tr class="even">
+<td><code>dom_reported</code></td>
+<td>Integer</td>
+<td>Days on market from MLS.</td>
+</tr>
+<tr class="odd">
+<td><code>dom_calculated</code></td>
+<td>Integer</td>
+<td>Calculated days between listing and sale date.</td>
+</tr>
+<tr class="even">
+<td><code>price_per_sqft</code></td>
+<td>Numeric</td>
+<td>List or sale price divided by square footage.</td>
+</tr>
+<tr class="odd">
+<td><code>age</code></td>
+<td>Integer</td>
+<td>Age of property (current year minus built year).</td>
+</tr>
+<tr class="even">
+<td><code>sale_year</code></td>
+<td>Integer</td>
+<td>Year of sale or listing if unsold.</td>
+</tr>
+<tr class="odd">
+<td><code>property_category</code></td>
+<td>Enum</td>
+<td>Standardised category (SF, MF, CC, RN).</td>
+</tr>
+<tr class="even">
+<td><code>optional_tags</code></td>
+<td>JSON</td>
+<td>Array of optionality flags detected in remarks and data (e.g.,
+<code>"inlaw_potential"</code>, <code>"large_lot"</code>,
+<code>"mispriced"</code>).</td>
+</tr>
+<tr class="odd">
+<td><code>strategy_classification</code></td>
+<td>Enum</td>
+<td>Primary strategy tab classification assigned by screening
+logic.</td>
+</tr>
+<tr class="even">
+<td><code>deal_status</code></td>
+<td>Enum</td>
+<td>Outcome of screening: <code>recommended</code>,
+<code>watchlist</code>, or <code>none</code>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="assumptions">2.3 <code>Assumptions</code></h3>
+<p>Holds underwriting assumptions by scenario and property type.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>scenario</code></td>
+<td>Enum</td>
+<td>Conservative, Balanced, Growth (user selectable).</td>
+</tr>
+<tr class="even">
+<td><code>property_category</code></td>
+<td>Enum</td>
+<td>SF, MF, CC.</td>
+</tr>
+<tr class="odd">
+<td><code>bedrooms</code></td>
+<td>Integer</td>
+<td>Bedroom count (for rent assumptions).</td>
+</tr>
+<tr class="even">
+<td><code>estimated_rent</code></td>
+<td>Numeric</td>
+<td>Monthly rent per unit under this scenario.</td>
+</tr>
+<tr class="odd">
+<td><code>expense_ratio</code></td>
+<td>Numeric</td>
+<td>Operating expenses as a fraction of gross rent.</td>
+</tr>
+<tr class="even">
+<td><code>vacancy_rate</code></td>
+<td>Numeric</td>
+<td>Vacancy allowance.</td>
+</tr>
+<tr class="odd">
+<td><code>tax_rate</code></td>
+<td>Numeric</td>
+<td>Property tax rate (residential or CIP).</td>
+</tr>
+<tr class="even">
+<td><code>financing_rate</code></td>
+<td>Numeric</td>
+<td>Assumed mortgage interest rate.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="screeningparameters">2.4 <code>ScreeningParameters</code></h3>
+<p>Defines threshold values and rules for each strategy.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>strategy</code></td>
+<td>Enum</td>
+<td>Name of strategy tab.</td>
+</tr>
+<tr class="even">
+<td><code>min_entry_cap_rate</code></td>
+<td>Numeric</td>
+<td>Minimum acceptable entry cap rate.</td>
+</tr>
+<tr class="odd">
+<td><code>min_lot_size</code></td>
+<td>Numeric</td>
+<td>Minimum lot size (acres) where applicable.</td>
+</tr>
+<tr class="even">
+<td><code>min_gross_floor_area</code></td>
+<td>Numeric</td>
+<td>For two‑family conversions (e.g., 1 800 sq ft).</td>
+</tr>
+<tr class="odd">
+<td><code>risk_weight</code></td>
+<td>Numeric</td>
+<td>Weight applied to risk factors in scoring.</td>
+</tr>
+<tr class="even">
+<td><code>notes</code></td>
+<td>Text</td>
+<td>Additional rules (e.g., ADU size limit, zoning district
+requirements).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="screeningresults">2.5 <code>ScreeningResults</code></h3>
+<p>Stores computed financial metrics for each listing and scenario.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>listing_id</code></td>
+<td>Foreign Key</td>
+<td>Links to <code>MLSListings</code>.</td>
+</tr>
+<tr class="even">
+<td><code>scenario</code></td>
+<td>Enum</td>
+<td>Assumptions scenario used (Balanced or Growth).</td>
+</tr>
+<tr class="odd">
+<td><code>estimated_rent</code></td>
+<td>Numeric</td>
+<td>Estimated monthly rent (per unit).</td>
+</tr>
+<tr class="even">
+<td><code>gross_rent</code></td>
+<td>Numeric</td>
+<td>Annualised rent (rent × bedrooms × 12).</td>
+</tr>
+<tr class="odd">
+<td><code>operating_expenses</code></td>
+<td>Numeric</td>
+<td>Expense estimate (gross_rent × expense_ratio).</td>
+</tr>
+<tr class="even">
+<td><code>property_tax</code></td>
+<td>Numeric</td>
+<td>Tax estimate (list_price × tax_rate).</td>
+</tr>
+<tr class="odd">
+<td><code>noi</code></td>
+<td>Numeric</td>
+<td>Net operating income
+(gross_rent × (1 − vacancy) – expenses – tax).</td>
+</tr>
+<tr class="even">
+<td><code>entry_cap_rate</code></td>
+<td>Numeric</td>
+<td>NOI / list_price.</td>
+</tr>
+<tr class="odd">
+<td><code>stabilised_noi</code></td>
+<td>Numeric</td>
+<td>NOI after renovation or ADU addition (for relevant strategies).</td>
+</tr>
+<tr class="even">
+<td><code>stabilised_cap_rate</code></td>
+<td>Numeric</td>
+<td>Stabilised NOI / total capital invested.</td>
+</tr>
+<tr class="odd">
+<td><code>score</code></td>
+<td>Numeric</td>
+<td>Composite score combining cap rate, optionality flags and risk
+penalties.</td>
+</tr>
+</tbody>
+</table>
+<h3
+id="offmarketleads-optional-future-extension">2.6 <code>OffMarketLeads</code>
+(optional future extension)</h3>
+<p>Stores off‑market targets generated by the Off‑Market Pipeline
+engine. Fields include address, owner mailing address, tenure, lot size,
+property type, motivation signals, contact status and notes. These leads
+can be ingested from assessor records and external data sources when
+permissions allow.</p>
+<h2 id="calculation-logic">3 Calculation Logic</h2>
+<p>The backend processing pipeline performs the following steps when a
+new MLS dataset is uploaded:</p>
+<ol type="1">
+<li><p><strong>Data ingestion and cleaning:</strong> Standardise column
+names; parse dates; convert list and sale prices to numeric values;
+parse square footage and lot size; clean statuses and remarks; assign
+property categories. Store raw records in <code>MLSListings</code> and
+computed fields in <code>DerivedMetrics</code>.</p></li>
+<li><p><strong>Derived metrics:</strong> Compute
+<code>dom_calculated</code>, <code>price_per_sqft</code>,
+<code>age</code>, <code>sale_year</code>, and detect optionality flags
+using keyword matching in remarks and lot size thresholds (e.g.,
+<code>inlaw_potential</code> if remarks mention “in‑law” or “ADU”;
+<code>large_lot</code> if <code>lot_acres ≥ 0.5</code>).</p></li>
+<li><p><strong>Strategy screening:</strong> Apply the rules defined in
+<code>ScreeningParameters</code> to classify each listing into zero or
+more strategies. For each strategy and scenario (Balanced, Growth),
+compute financial metrics using assumptions from the
+<code>Assumptions</code> table:</p></li>
+<li><strong>Estimated rent</strong> = look up
+<code>Assumptions.estimated_rent</code> for the property type, bedroom
+count and scenario.</li>
+<li><strong>Gross rent</strong> = estimated_rent × bedrooms × 12 (for
+multi‑family, multiply by unit count or use average unit size if
+available).</li>
+<li><strong>Vacancy adjustment</strong> = gross_rent ×
+(1 − vacancy_rate).</li>
+<li><strong>Operating expenses</strong> = gross_rent ×
+expense_ratio.</li>
+<li><strong>Property tax</strong> = list_price × tax_rate.</li>
+<li><strong>Net operating income (NOI)</strong> = vacancy-adjusted gross
+rent – expenses – tax.</li>
+<li><strong>Entry cap rate</strong> = NOI / list_price.</li>
+<li><strong>Stabilised NOI</strong> = (vacancy-adjusted gross rent at
+target rent after renovation or ADU) – expenses – tax.</li>
+<li><strong>Stabilised cap rate</strong> = stabilised_noi / (list_price
++ renovation_cost). Renovation costs can be estimated via a
+rule‑of‑thumb (e.g., $30–$50 ft²) or entered by the user.</li>
+<li><p><strong>Scoring</strong> = weighted sum of (entry_cap_rate
+relative to threshold, optionality flags present, risk factors). A
+simple formula might be:</p></li>
+</ol>
+<ul>
+<li><pre><code>score = (entry_cap_rate − min_entry_cap_rate) × 100
+        + optionality_bonus
+        − risk_weight × risk_penalties</code></pre>
+<p>where <code>optionality_bonus</code> is based on tags (e.g., +10
+points for large lot or in‑law potential) and
+<code>risk_penalties</code> reflect long DOM, unknown HOA fees or major
+renovations.</p></li>
+</ul>
+<ol start="14" type="1">
+<li><p><strong>Deal classification:</strong> A listing is marked
+<strong>Recommended</strong> in a strategy tab if
+<code>entry_cap_rate ≥ min_entry_cap_rate</code>, there are no critical
+risk flags (e.g., missing HOA data), and it scores above a certain
+threshold. It is marked <strong>Watchlist</strong> if it nearly meets
+the cap‑rate threshold or has unresolved risk items but shows potential.
+Listings not meeting criteria remain unassigned or are hidden.</p></li>
+<li><p><strong>Strategy assignment:</strong> If a listing meets more
+than one strategy’s criteria, assign it to the strategy with the highest
+score or allow it to appear under multiple tabs. Optionality deals that
+don’t meet cap‑rate targets are stored in a dedicated sub‑table to be
+displayed under “Optionality.”</p></li>
+<li><p><strong>Result storage:</strong> Write the computed records into
+<code>ScreeningResults</code> and update
+<code>DerivedMetrics.strategy_classification</code> and
+<code>deal_status</code>. The front‑end queries these tables to populate
+each tab.</p></li>
+</ol>
+<h2 id="ui-wireframe-description">4 UI Wireframe Description</h2>
+<h3 id="dashboard">4.1 Dashboard</h3>
+<p>The home tab displays:</p>
+<ul>
+<li><strong>Market snapshot cards</strong> summarising median sale
+price, price per square foot, days on market and transaction volume by
+property type.</li>
+<li><strong>Cap‑rate gauge</strong> comparing Marlborough cap rates to
+Greater Boston and MetroWest. Users can select Balanced or Growth
+assumptions.</li>
+<li><strong>Recent updates</strong> listing date of last MLS import,
+number of active listings and counts by strategy classification.</li>
+<li><strong>Navigation bar</strong> for switching tabs.</li>
+</ul>
+<h3 id="strategy-tabs-common-layout">4.2 Strategy Tabs (common
+layout)</h3>
+<p>Each strategy tab follows a similar structure:</p>
+<ol type="1">
+<li><p><strong>Assumptions panel</strong> (collapsible). Displays the
+rent, expense, vacancy and tax assumptions driving calculations. Users
+can toggle between Balanced and Growth profiles or customise values.
+Changing assumptions triggers a recalculation on the fly.</p></li>
+<li><p><strong>Recommended Deals table.</strong> Columns
+include:</p></li>
+<li>MLS # (clickable to open a detail modal)</li>
+<li>Address</li>
+<li>Property Type</li>
+<li>Beds/Baths</li>
+<li>List Price</li>
+<li>Estimated Rent (scenario‑specific)</li>
+<li>NOI</li>
+<li>Entry Cap Rate</li>
+<li>Stabilised Cap Rate (if applicable)</li>
+<li>Risk Flags (icons or colour indicators)</li>
+<li>Optionality Tags (e.g., “Large lot,” “In‑law potential”)</li>
+</ol>
+<p>Rows are sortable by cap rate or score and filterable (price range,
+bedroom count, DOM).</p>
+<ol type="1">
+<li><p><strong>Watchlist table.</strong> Same columns as Recommended but
+with an extra “Reasons for Watchlist” column summarising outstanding
+verification needs (e.g., HOA fee unknown, condition uncertain, ADU
+permit required).</p></li>
+<li><p><strong>Optionality table.</strong> Focuses on deals that do not
+meet cap‑rate thresholds but offer unique upside. Columns include
+optionality description, required verification and potential upside
+mechanism.</p></li>
+<li><p><strong>Off‑Market Pipeline section.</strong> Provides guidance
+rather than data: bullet points describing target owner profiles,
+identification filters (long tenure, absentee, large lot) and
+recommended outreach tactics (personal letters, code‑violation
+monitoring). In future versions it can link to an
+<code>OffMarketLeads</code> page listing individual leads.</p></li>
+<li><p><strong>Risk &amp; Verification checklist.</strong> Summarises
+key risks for the strategy (e.g., permitting risk, HOA restrictions,
+rent‑control uncertainty). For each recommended or watchlist deal,
+clicking the risk icon opens a modal detailing outstanding due‑diligence
+items.</p></li>
+</ol>
+<h3 id="upload-settings-tab">4.3 Upload / Settings Tab</h3>
+<p>This tab allows users to:</p>
+<ul>
+<li>Upload new MLS data files (CSV or text). A progress indicator shows
+parsing status. Files are stored with metadata (upload date, number of
+records, processing outcomes).</li>
+<li>Adjust global underwriting assumptions such as rent curves, expense
+ratios, vacancy rates, tax rates and financing terms. Changes apply
+across all strategy tabs.</li>
+<li>View import history and revert to a prior dataset if necessary.</li>
+</ul>
+<h2 id="upload-and-refresh-pipeline">5 Upload and Refresh Pipeline</h2>
+<ol type="1">
+<li><p><strong>User upload</strong> – The user selects an MLS export
+file via the Upload tab. The file is sent to the server through secure
+upload.</p></li>
+<li><p><strong>Parsing and cleaning</strong> – A server‑side job reads
+the file, normalises column names, removes currency symbols and commas,
+parses dates into standard format, and stores raw data into
+<code>MLSListings</code>. Cleaning rules mirror those used in the
+analytical project.</p></li>
+<li><p><strong>Derivation and classification</strong> – The job computes
+derived metrics, detects optionality flags using natural‑language search
+and numeric thresholds, and stores results in
+<code>DerivedMetrics</code>.</p></li>
+<li><p><strong>Strategy screening</strong> – Using the
+<code>Assumptions</code> and <code>ScreeningParameters</code> tables,
+the system calculates NOI, cap rates and scores for each scenario and
+assigns deals to strategies (Recommended or Watchlist). Results are
+saved to <code>ScreeningResults</code> and cross‑referenced with
+<code>DerivedMetrics</code>.</p></li>
+<li><p><strong>Cache invalidation &amp; notification</strong> – Once
+processing completes, the backend updates a cache of query results used
+by the front‑end and notifies the client to refresh the displayed data.
+The timestamp of the import and the number of listings processed appear
+on the Dashboard.</p></li>
+<li><p><strong>Historical tracking</strong> – Each import is versioned;
+users can view metrics at the time of import and compare trends over
+time. If a new import produces errors, the app can revert to a previous
+dataset.</p></li>
+</ol>
+<h2 id="extensibility-considerations">6 Extensibility
+Considerations</h2>
+<ul>
+<li><strong>Third‑party data integration:</strong> The pipeline can be
+extended to pull assessor records, code‑violation logs or GIS data to
+enrich the off‑market pipeline. API connectors should respect privacy
+laws and usage terms.</li>
+<li><strong>User accounts &amp; permissions:</strong> In a multi‑user
+setting, roles (analyst, manager, administrator) can control who can
+upload data, adjust assumptions or see off‑market leads.</li>
+<li><strong>Machine learning enhancements:</strong> Optionality
+detection can evolve beyond keyword search using NLP models to identify
+phrases indicating ADU or redevelopment potential.</li>
+<li><strong>Export &amp; reporting:</strong> Provide export functions
+(CSV, PDF) to generate deal sheets or memoranda for investors. Leverage
+the existing Markdown and PPTX generation scripts as templates.</li>
+</ul>
+<p>This specification translates the analytical work performed on the
+Marlborough MLS dataset into a practical application blueprint. The
+tab‑driven design mirrors the investment strategies defined earlier,
+enabling investors to move seamlessly from high‑level market insights to
+specific deal opportunities, while the upload pipeline ensures that all
+computations are automatically refreshed as new data arrives.</p>
+</body>
+</html>

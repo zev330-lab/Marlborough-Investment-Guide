@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>analysis6</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="cap-rate-sensitivity-analysis-for-marlborough-massachusetts">Cap
+Rate Sensitivity Analysis for Marlborough, Massachusetts</h1>
+<p>This analysis estimates <em>entry cap rates</em> for single‑family
+rentals (SF), condos (CC) and small multi‑family (MF) properties using
+the cleaned MLS dataset (2019–2026) and the rental and expense
+assumptions defined earlier. Cap rate is calculated as <strong>NOI /
+purchase price</strong>, where net operating income (NOI) equals gross
+potential rent × 95 % occupancy minus operating expenses and property
+tax. We apply <strong>moderate rent assumptions</strong> (e.g., ~$2.36 k
+per month for a one‑bedroom; $2.69 k for a two‑bedroom<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[1]</a>),
+a <strong>30 % operating expense ratio</strong> for SF and condos,
+<strong>40 % for multi‑family</strong>, and <strong>Marlborough’s
+FY 2025 residential and commercial tax rates</strong> (9.86 per $1,000
+for SF/CC; 16.96 per $1,000 for MF)<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=FY%202025%20Tax%20Rates">[2]</a>.
+These are entry cap rates based on current rents and list prices; they
+do not account for value‑add or redevelopment potential.</p>
+<h2 id="caprate-ranges-by-property-type">Cap‑Rate Ranges by Property
+Type</h2>
+<p>The table below summarises the distribution of estimated entry cap
+rates across all sale listings (not just active) for each property type.
+Quartiles illustrate the realistic range of cap rates investors can
+expect in Marlborough.</p>
+<table>
+<colgroup>
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+<col style="width: 12%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Property type</th>
+<th>Count</th>
+<th>Mean cap rate</th>
+<th>25th percentile</th>
+<th><strong>Median (50th %)</strong></th>
+<th>75th percentile</th>
+<th>Max</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Single‑family (SF)</strong></td>
+<td>2,303</td>
+<td><strong>5.27 %</strong></td>
+<td>4.08 %</td>
+<td><strong>4.95 %</strong></td>
+<td><strong>6.05 %</strong></td>
+<td>20.1 %</td>
+<td>Cap rates cluster around 5 %, reflecting high home values and
+moderate rents. Some outliers show high caps due to low price or high
+rents.</td>
+</tr>
+<tr class="even">
+<td><strong>Condos (CC)</strong></td>
+<td>578</td>
+<td><strong>5.66 %</strong></td>
+<td>3.78 %</td>
+<td><strong>5.05 %</strong></td>
+<td><strong>7.23 %</strong></td>
+<td>13.5 %</td>
+<td>Condos offer slightly higher yields; older units priced below the
+median can produce cap rates above 7 %.</td>
+</tr>
+<tr class="odd">
+<td><strong>Small multi‑family (MF)</strong></td>
+<td>263</td>
+<td><strong>4.43 %</strong></td>
+<td>3.10 %</td>
+<td><strong>4.62 %</strong></td>
+<td><strong>5.82 %</strong></td>
+<td>13.3 %</td>
+<td>Multi‑family yields are suppressed by high purchase prices and
+commercial tax rate. Many older buildings have low rental income
+relative to value.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation:</strong> Single‑family and condo cap rates
+generally fall between <strong>4 % and 6 %</strong>, while small
+multi‑family cap rates are lower (3–5.8 %) because most properties have
+high valuations and limited rent upside. These ranges are higher than
+downtown Boston’s Class A multifamily cap rates (4.8–5.5 %) but
+comparable to Boston Class B (5.5–6.5 %)<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>.
+Marlborough thus offers slightly higher yields than the urban core but
+not as high as cash‑flow markets in the Midwest.</p>
+<h2 id="how-many-properties-qualify-at-different-caprate-thresholds">How
+Many Properties Qualify at Different Cap‑Rate Thresholds</h2>
+<h3 id="across-all-mls-sale-listings-20192026">Across all MLS sale
+listings (2019–2026)</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Threshold category</th>
+<th>Minimum cap rate</th>
+<th>SF properties meeting threshold</th>
+<th>CC properties meeting threshold</th>
+<th>MF properties meeting threshold</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Conservative</strong> (income‑oriented)</td>
+<td>≥ 5 % (SF/CC), ≥ 5.5 % (MF)</td>
+<td><strong>1,120 / 2,303</strong></td>
+<td><strong>292 / 578</strong></td>
+<td><strong>79 / 263</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Market‑average</strong></td>
+<td>≥ 5.5 % (SF/CC), ≥ 6 % (MF)</td>
+<td><strong>876</strong></td>
+<td><strong>261</strong></td>
+<td><strong>60</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Aggressive / growth‑oriented</strong></td>
+<td>≥ 6 % (SF/CC), ≥ 6.5 % (MF)</td>
+<td><strong>633</strong></td>
+<td><strong>239</strong></td>
+<td><strong>47</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="active-sale-listings-feb-2026">Active sale listings
+(Feb 2026)</h3>
+<p>The number of active sale listings is low (45 single‑family, 7 condos
+and 4 multi‑family). Applying the same thresholds:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Threshold category</th>
+<th>SF</th>
+<th>CC</th>
+<th>MF</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Conservative</strong> (≥ 5 %, ≥ 5.5 %)</td>
+<td><strong>9</strong></td>
+<td><strong>3</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="even">
+<td><strong>Market‑average</strong> (≥ 5.5 %, ≥ 6 %)</td>
+<td><strong>6</strong></td>
+<td><strong>3</strong></td>
+<td><strong>0</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Aggressive</strong> (≥ 6 %, ≥ 6.5 %)</td>
+<td><strong>0</strong></td>
+<td><strong>3</strong></td>
+<td><strong>0</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="observations">Observations</h3>
+<ul>
+<li><strong>Single‑family rentals:</strong> About <strong>49 %</strong>
+of SF sales in the MLS dataset meet the conservative 5 % cap‑rate
+threshold, but only about <strong>27 %</strong> exceed 6 %. Among
+currently active listings, very few meet even the conservative
+threshold, reflecting limited inventory and high pricing.</li>
+<li><strong>Condos:</strong> Condos show a slightly wider spread;
+<strong>51 %</strong> exceed 5 %, and <strong>41 %</strong> exceed 6 %.
+Even under aggressive thresholds, roughly <strong>239</strong>
+historical condo listings would qualify, including both vintage units
+needing upgrades and some newer ones.</li>
+<li><strong>Small multi‑family:</strong> Cap rates are depressed; only
+<strong>79</strong> of 263 MLS multi‑family properties exceed 5.5 %, and
+fewer than <strong>18 %</strong> surpass 6.5 %. None of the current
+multi‑family listings meet even the conservative threshold. High
+purchase prices and commercial tax rates suppress yields.</li>
+</ul>
+<h2 id="marlborough-on-the-incomeappreciation-spectrum">Marlborough on
+the Income–Appreciation Spectrum</h2>
+<p>Marlborough is best described as a <strong>moderate‑yield
+appreciation market</strong>. It sits between the low‑cap,
+high‑stability markets of inner‑Boston and the high‑yield, high‑risk
+markets of the Midwest. Several factors tilt Marlborough toward
+appreciation:</p>
+<ul>
+<li><strong>Strong economic drivers:</strong> The city hosts major
+life‑science and high‑tech employers such as Cytiva, Boston Scientific
+and Sartorius<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[4]</a>.
+Median household income ($99,176) and average home value (~$550 k) are
+high<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Demographics">[5]</a>,
+supporting robust demand but also compressing cap rates.</li>
+<li><strong>Limited developable land and high property values:</strong>
+Marlborough’s location at the junction of I‑495/I‑290/I‑90 fosters
+commuting and corporate investment, but the supply of single‑family lots
+is constrained, pushing prices up and yields down. This scarcity mirrors
+Boston’s limited inventory environment, where Class A and B multifamily
+cap rates range between 4.8 % and 6.5 %<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[6]</a>.</li>
+<li><strong>Income stability with moderate cash flow:</strong> Renters
+drawn by life‑science jobs provide stable occupancy, yet the ratio of
+rent to purchase price limits cash‑on‑cash returns. Multifamily cap
+rates around 4–5 % indicate reliance on appreciation rather than high
+income.</li>
+<li><strong>Macro conditions:</strong> Nationwide, multifamily cap rates
+compressed to 4.92 % for B‑class assets and 5.38 % for C‑class in early
+2025<a
+href="https://apartmentloanstore.com/boston/massachusetts/cap-rate#:~:text=Multifamily">[7]</a>.
+With borrowing costs around 6 %<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=1,those%20with%20strong%20financing%20relationships">[8]</a>
+and expenses rising, investors accept lower in‑place yields in exchange
+for long‑term growth in rents and property values.</li>
+</ul>
+<p>Overall, investors in Marlborough should expect moderate current
+yields and place greater emphasis on <strong>value‑add
+improvements</strong>, <strong>rent growth</strong> and
+<strong>appreciation</strong> to achieve desired returns.</p>
+<h2 id="revising-caprate-bands-to-expand-opportunity">Revising Cap‑Rate
+Bands to Expand Opportunity</h2>
+<p>The analysis above shows that strict cap‑rate thresholds dramatically
+limit the pool of candidates—especially for small multi‑family. To
+broaden the opportunity set while remaining rational, we recommend
+adjusting cap‑rate bands as follows:</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Strategy</th>
+<th>Original minimum cap rate</th>
+<th>Revised cap‑rate band</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Core buy‑and‑hold (SF &amp; CC)</strong></td>
+<td>≥ 5.5 %</td>
+<td><strong>5.0–6.0 %</strong></td>
+<td>Many solid single‑family and condo assets trade between 5–6 % caps.
+Lowering the floor to <strong>5 %</strong> aligns with Boston Class A/B
+yields<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>
+and acknowledges that Marlborough is an appreciation market. It
+increases eligible properties by ~20 %.</td>
+</tr>
+<tr class="even">
+<td><strong>Value‑add / renovation</strong></td>
+<td>≥ 5 % entry; ≥ 6.5 % stabilized</td>
+<td><strong>4.5–5.5 % entry; ≥ 6.0 % stabilized</strong></td>
+<td>Allowing slightly lower entry yields (4.5–5 %) captures older condos
+and SF homes priced above the median but with upside. A 6 % stabilized
+cap remains realistic given renovation cost and rent growth.</td>
+</tr>
+<tr class="odd">
+<td><strong>Small multi‑family income</strong></td>
+<td>≥ 6 %</td>
+<td><strong>5.5–6.5 %</strong></td>
+<td>Given that Boston Class C multi‑family cap rates range 6.5–7.5 %<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>
+but Marlborough’s average MF cap is ~4.6 %, a 5.5 % floor is pragmatic.
+It doubles the number of qualifying properties while still exceeding
+borrowing costs.</td>
+</tr>
+<tr class="even">
+<td><strong>Development / redevelopment</strong></td>
+<td>≥ 7 % stabilized</td>
+<td><strong>6.5–7.5 % stabilized</strong></td>
+<td>Large parcels rarely appear; adopting a band rather than a hard
+minimum acknowledges unique deal structures. Returns should remain at
+least 150 bp above the going-in cap rate for comparable finished
+product.</td>
+</tr>
+<tr class="odd">
+<td><strong>Creative / unconventional (co‑living, ADU)</strong></td>
+<td>≥ 6.5 %</td>
+<td><strong>6.0–7.0 %</strong></td>
+<td>Premium rents may justify higher yields, but strict 6.5 % floors
+eliminate most properties. A 6 % entry with a clear path to ~7 % after
+ADU creation or co‑living conversion is reasonable given the new
+Massachusetts ADU law permitting 900‑sq‑ft units by right<a
+href="https://www.mass.gov/info-details/accessory-dwelling-units#:~:text=On%20Aug,will%20make%20a%20big%20difference">[9]</a>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Implications:</strong> With the revised bands, a larger
+fraction of MLS properties meet the minimum yield
+requirements—especially in the core and value‑add categories—while still
+acknowledging risk and market conditions. Investors must weigh the
+trade‑off between current cash flow and long‑term appreciation, align
+cap‑rate targets with available inventory, and perform due diligence to
+validate rents, expenses and property condition.</p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[1]</a>
+Average Rent in Marlborough, MA: 2026 Rent Prices by Neighborhood</p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/">https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/</a></p>
+<p><a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=FY%202025%20Tax%20Rates">[2]</a>
+<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[4]</a>
+<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Demographics">[5]</a>
+Fast Facts &amp; Data - Marlborough Economic Development Corporation</p>
+<p><a
+href="https://marlboroughedc.com/fast-facts-data/">https://marlboroughedc.com/fast-facts-data/</a></p>
+<p><a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>
+<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[6]</a>
+<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=1,those%20with%20strong%20financing%20relationships">[8]</a>
+Boston Multi-Family Cap Rates 2025: Complete Investor Guide | Signal
+Real Estate</p>
+<p><a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/">https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/</a></p>
+<p><a
+href="https://apartmentloanstore.com/boston/massachusetts/cap-rate#:~:text=Multifamily">[7]</a>
+Apartment Loans - Cap Rates in Boston, Massachusetts</p>
+<p><a
+href="https://apartmentloanstore.com/boston/massachusetts/cap-rate">https://apartmentloanstore.com/boston/massachusetts/cap-rate</a></p>
+<p><a
+href="https://www.mass.gov/info-details/accessory-dwelling-units#:~:text=On%20Aug,will%20make%20a%20big%20difference">[9]</a>
+Accessory Dwelling Units | Mass.gov</p>
+<p><a
+href="https://www.mass.gov/info-details/accessory-dwelling-units">https://www.mass.gov/info-details/accessory-dwelling-units</a></p>
+</body>
+</html>

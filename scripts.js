@@ -4,27 +4,13 @@
 // menu and to show or hide content sections based on user selection.
 
 document.addEventListener('DOMContentLoaded', function () {
-  const sideMenu = document.getElementById('sideMenu');
-  const menuToggle = document.querySelector('.menu-toggle');
-  const closeMenu = document.querySelector('.close-menu');
-  const menuLinks = document.querySelectorAll('.menu-link');
+  // Select all navigation links in the top nav
+  const navLinks = document.querySelectorAll('.nav-link');
 
-  // Open the side menu
-  menuToggle.addEventListener('click', () => {
-    sideMenu.classList.add('open');
-  });
-
-  // Close the side menu
-  closeMenu.addEventListener('click', () => {
-    sideMenu.classList.remove('open');
-  });
-
-  // Handle navigation between sections
-  menuLinks.forEach((link) => {
+  // When a nav link is clicked, switch sections
+  navLinks.forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      // Close menu on selection
-      sideMenu.classList.remove('open');
       const targetId = link.getAttribute('href').substring(1);
       const targetSection = document.getElementById(targetId);
       // Hide all sections

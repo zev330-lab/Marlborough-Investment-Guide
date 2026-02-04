@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>analysis5</title>
+  <style>
+    html {
+      line-height: 1.5;
+      font-family: Georgia, serif;
+      font-size: 20px;
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 1em;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, 'Lucida Console', Consolas, monospace;
+      font-size: 85%;
+      margin: 0;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+</head>
+<body>
+<h1 id="deal-selection-logic-for-marlborough-investment-strategies">Deal
+Selection Logic for Marlborough Investment Strategies</h1>
+<p>This document defines screening criteria and formulas for identifying
+qualified deals from the cleaned MLS dataset. It covers <strong>core
+buy‑and‑hold</strong>, <strong>value‑add/renovation</strong>,
+<strong>small multi‑family income</strong>,
+<strong>development/redevelopment</strong>, and
+<strong>creative/unconventional</strong> strategies. Each section
+specifies minimum entry cap rates, expense assumptions, NOI estimation
+methods, and qualitative filters for cap‑rate upside, rent growth, and
+development optionality. Citations from market research justify inputs
+such as tax rates, rent benchmarks and regulatory constraints.</p>
+<h2 id="general-data-preparation-and-assumptions">General Data
+Preparation and Assumptions</h2>
+<ol type="1">
+<li><strong>Purchase price / entry price</strong> – for each MLS
+listing, use the <code>LISTPRICE</code> (or <code>SOLDPRICE</code> if
+lower) as the acquisition price.</li>
+<li><strong>Rent estimates</strong> – derive monthly rent per bedroom
+and property type using the moderate rent assumptions from the
+previously prepared rent report. For example, 1‑bedroom rents average
+~$2,300, 2‑bedroom ~$2,700 and 3‑bedroom ~$3,500 according to RentCafe
+and MLS analysis<a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[1]</a>.
+Adjust upward (aggressive) or downward (conservative) depending on the
+strategy.</li>
+<li><strong>Vacancy/occupancy factor</strong> – apply a 5 % vacancy
+allowance (95 % economic occupancy) to gross potential rent.</li>
+<li><strong>Property tax</strong> – assume Marlborough’s FY 2025
+residential tax rate of <strong>$9.86 per $1,000</strong> of assessed
+value<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[2]</a>
+(≈0.986 % of purchase price). Commercial/multifamily properties use the
+CIP rate of <strong>$16.96 per $1,000</strong> (≈1.696 %)<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[2]</a>.
+For development sites, use the CIP rate on land value until
+stabilization.</li>
+<li><strong>Insurance, maintenance and other expenses</strong> – use a
+percentage of gross rent as a proxy. This varies by strategy and
+property type (see below). HOA fees for condos should be estimated from
+listing data or assumed at $400–$600 per unit per month.</li>
+<li><strong>Net operating income (NOI)</strong> – computed as:</li>
+</ol>
+<p><span class="math display">NOI = (Gross Monthly
+Rent×12×0.95) − Operating Expenses − Property Taxes</span></p>
+<ol type="1">
+<li><strong>Entry cap rate (</strong><span
+class="math inline"><em>R</em><sub><em>e</em><em>n</em><em>t</em><em>r</em><em>y</em></sub></span><strong>)</strong>
+– defined as NOI divided by acquisition price:</li>
+</ol>
+<p><span class="math display">$$R_{entry} =
+\frac{\text{NOI}}{\text{Purchase\ Price}}$$</span></p>
+<p>A deal qualifies if <span
+class="math inline"><em>R</em><sub><em>e</em><em>n</em><em>t</em><em>r</em><em>y</em></sub></span>
+exceeds the strategy’s minimum threshold.</p>
+<h2 id="core-buyandhold-lower-cap-lower-risk">1 Core Buy‑and‑Hold (Lower
+Cap, Lower Risk)</h2>
+<ul>
+<li><strong>Minimum entry cap rate</strong> – <strong>≥ 5.5 %</strong>.
+Core deals aim for stable cash flow with limited upside; therefore they
+tolerate a lower yield than value‑add plays but should exceed prevailing
+Boston Class A multifamily cap rates (~4.8–5.5 %)<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>.</li>
+<li><strong>Expense assumptions</strong> – assume <strong>30 % of gross
+rent</strong> for operating costs (maintenance, insurance, management)
+plus <strong>property tax</strong> at ~0.986 % of purchase price<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[2]</a>.
+For condos, add HOA fees estimated from the listing.</li>
+<li><strong>NOI estimation</strong> – compute gross rent using moderate
+rent assumptions for the unit’s bedroom count and property type. Apply
+the 30 % operating expense ratio and property tax to derive NOI.</li>
+<li><strong>Screening for cap‑rate upside</strong> – filter out listings
+where projected stabilized cap rate (using aggressive rent assumptions)
+is less than 1 % above entry cap rate. Focus on properties priced below
+median price per square foot for their type/year, indicating potential
+undervaluation relative to rent.</li>
+<li><strong>Rent growth potential</strong> – select neighborhoods/zip
+codes where MLS median sale prices have appreciated above the city
+median over the past two years and days‑on‑market are low. Use Data USA
+demographics to favour areas with rising incomes and population<a
+href="https://www.census.gov/quickfacts/fact/table/marlboroughcitymassachusetts/RTN131222#:~:text=Median%20households%20income%20,46%2C241%20Persons%20in%20poverty%2C%20percent">[4]</a>.
+Avoid units built in the last five years because upside is limited.</li>
+<li><strong>Development optionality</strong> – require lot size
+≤10,000 ft² and absence of excess yard area. Core buy‑and‑hold
+prioritizes turnkey properties with little redevelopment potential; ADU
+creation is optional but not critical. Check that the zoning allows at
+least one accessory dwelling unit under the new Massachusetts ADU law
+(units up to 900 ft² built by right)<a
+href="https://www.mass.gov/info-details/accessory-dwelling-units#:~:text=On%20Aug,will%20make%20a%20big%20difference">[5]</a>.</li>
+</ul>
+<h2 id="valueadd-renovation-strategy">2 Value‑Add / Renovation
+Strategy</h2>
+<ul>
+<li><strong>Minimum entry cap rate</strong> – <strong>≥ 5 %</strong>.
+Lower entry yield is acceptable because improvements should increase NOI
+and compress cap rates to ≥6.5 %.</li>
+<li><strong>Expense assumptions</strong> – assume <strong>35 % of gross
+rent</strong> for operating expenses (higher due to deferred
+maintenance) plus property tax at the residential rate. Include a
+capital expenditure allowance of <strong>$15–$25 per ft²</strong> for
+cosmetic and systems upgrades; this is a one‑time cost funded at
+acquisition and amortized over five years.</li>
+<li><strong>NOI estimation</strong> – use conservative rents to compute
+entry NOI; for stabilized NOI, use aggressive rent assumptions
+(reflecting market rents for renovated units). Apply the 35 % expense
+ratio and property tax.</li>
+<li><strong>Screening for cap‑rate upside</strong> – compute the
+difference between stabilized and entry cap rates; require at least
+<strong>150 basis points (1.5 %)</strong> increase. Filter for older
+properties (built before 1990) with below‑average price per square foot,
+high DOM (days on market) and dated finishes. MLS remarks and photos can
+flag “needs updating,” “estate sale,” or “as‑is” language.</li>
+<li><strong>Rent growth potential</strong> – prioritise areas benefiting
+from new employers or infrastructure projects. For example, near
+developments like Alta Marlborough or Green District phases<a
+href="https://www.marlborough-ma.gov/537/Green-District-Phases-3-4-Post-Road-Real#:~:text=This%20project%20is%20seeking%20a,resident%20amenities%2C%20and%20landscaped%20areas">[6]</a>
+that will increase demand. Use rent‑gap analysis: if projected rent
+after renovation remains below 110 % of current market rents (to avoid
+exceeding market ceiling), it qualifies.</li>
+<li><strong>Development optionality</strong> – look for properties on
+lots &gt;15,000 ft² where zoning permits conversion from single‑family
+to two‑family or three units (minimum 1,800 ft² and 15,000 ft² lot
+required for conversion<a
+href="https://ecode360.com/9217014#:~:text=Conversion%20of%20a%20single,accommodate%20two%20families%2C%20provided%20that">[7]</a>).
+This provides optionality to add an ADU or subdivide in the future.
+Avoid properties in neighbourhoods where restrictions on multi‑family or
+ADUs are stringent.</li>
+</ul>
+<h2 id="small-multifamily-income-strategy-320-units">3 Small
+Multi‑Family Income Strategy (3–20 Units)</h2>
+<ul>
+<li><strong>Minimum entry cap rate</strong> – <strong>≥ 6 %</strong>.
+Multi‑family investors expect higher yields due to management complexity
+and regulatory risk. Given Boston Class B yields 5.5–6.5 %<a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>,
+Marlborough should command 6 % or greater.</li>
+<li><strong>Expense assumptions</strong> – adopt <strong>40 % of gross
+rent</strong> for operating expenses (includes on‑site management,
+utilities common areas, and repairs) plus property tax at the CIP rate
+(~1.696 %)<a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[2]</a>.</li>
+<li><strong>NOI estimation</strong> – derive gross rent from
+bedroom‑count rent assumptions multiplied by number of units; apply
+vacancy factor and the 40 % expense ratio. Include potential ancillary
+income (laundry, parking) as 5 % of gross rent.</li>
+<li><strong>Screening for cap‑rate upside</strong> – compute pro‑forma
+NOI using aggressive rent assumptions (market rents) and capital
+improvements (e.g., interior upgrades). Require a stabilized cap rate
+≥7 %. Check that current rents (if provided) are at least 10 % below
+market, indicating room for rent lifts. Use property age (pre‑1980),
+high operational expenses, or mismanagement flagged in broker
+remarks.</li>
+<li><strong>Rent growth potential</strong> – favour properties near
+major employers or new mixed‑use projects (e.g., Sartorius and Moderna
+expansions which brought hundreds of jobs<a
+href="https://marlboroughedc.com/life-sciences-hub/#:~:text=Tax%20Increment%20Financing%20,Growth%20in%20Marlborough">[8]</a>).
+Evaluate census tracts with high share of renters and limited
+construction; cross‑reference MLS transaction volume by year to infer
+supply constraints.</li>
+<li><strong>Development optionality</strong> – choose parcels with
+excess land or parking that could support additional units. Zoning in
+Marlborough allows multiple structures if each building faces a street
+or open space and provides 5,000 ft² of lot area per family<a
+href="https://ecode360.com/9217014#:~:text=Two%20residential%20structures%20on%20a,subject%20to%20the%20following%20conditions">[9]</a>.
+If the lot meets these criteria, there may be potential to add units or
+split the parcel. Also consider whether ADUs can be added to each unit
+(e.g., converting basements to legal accessory apartments).</li>
+</ul>
+<h2 id="development-redevelopment-strategy">4 Development /
+Redevelopment Strategy</h2>
+<ul>
+<li><strong>Minimum entry cap rate</strong> – acquisition cap rates are
+not the primary metric; focus on <strong>projected stabilized cap rate
+≥ 7 %</strong> upon completion. Land acquisitions may show negative
+initial yield.</li>
+<li><strong>Expense assumptions</strong> – construction costs estimated
+at <strong>$225–$300 per ft²</strong> for residential and <strong>$350 +
+per ft²</strong> for mixed‑use, plus soft costs (~15 % of hard costs)
+and financing. Operating expenses after stabilization assumed at
+<strong>30–40 %</strong> of gross rent, depending on property type.
+Property tax on unimproved land uses CIP rate; after completion, apply
+residential or CIP rate as appropriate.</li>
+<li><strong>NOI estimation</strong> – project rents by multiplying units
+and square footage by market rents at time of completion. Use moderate
+rent growth (2–3 % per year) through construction. Subtract projected
+expenses and taxes to estimate stabilized NOI; discount back to
+determine internal rate of return.</li>
+<li><strong>Screening for cap‑rate upside</strong> – target parcels
+where current use is obsolete (e.g., vacant commercial buildings or
+under‑utilized single‑family homes on large lots). Ensure zoning allows
+multifamily or mixed‑use; Marlborough zoning permits multi‑family if lot
+meets Article VII requirements and provides landscaped area<a
+href="https://ecode360.com/9217014#:~:text=">[10]</a>. Favour properties
+in urban renewal areas or near city‑sponsored projects like Exchange
+Place or Walcott Heritage Farms<a
+href="https://www.marlborough-ma.gov/539/Exchange-Place-JW-Capital-Partners-LLC-M#:~:text=This%20project%20is%20seeking%20and,courtyard%20adjacent%20to%20Union%20Common">[11]</a><a
+href="https://www.marlborough-ma.gov/541/WP-Marlborough-MA-Owner-LLC-Walcott-Heri#:~:text=This%20project%20is%20seeking%20a,7%20acres">[12]</a>.</li>
+<li><strong>Rent growth potential</strong> – rely on demographic trends:
+Marlborough’s population grew 7.5 % between 2012 and 2022<a
+href="https://marlboroughedc.com/wp-content/uploads/2025/02/495-MetroWest-Partnership-Marlborough-Community-Profile-2024_Reduced-PDF.pdf#:~:text=MARLBOROUGH%2C%20MA%20Population%3A%2041%2C391%20Median,Vacant%20Housing%20Units%3A%20%20892">[13]</a>
+and unemployment is low<a
+href="https://marlboroughedc.com/life-sciences-hub/#:~:text=">[14]</a>.
+Select sites near new life‑science employers; this supports strong
+lease‑up and premium rents.</li>
+<li><strong>Development optionality</strong> – require lot size
+≥25,000 ft² for large multi‑family or mixed‑use; check for by‑right
+density bonuses (e.g., 40R districts) or tax‑increment financing (TIF)
+eligibility, which can reduce property taxes for a period<a
+href="https://marlboroughedc.com/life-sciences-hub/#:~:text=Tax%20Increment%20Financing%20,Growth%20in%20Marlborough">[8]</a>.
+Confirm that conversion from single‑family to multi‑family is allowed
+under zoning (1,800 ft² minimum floor area per two‑family conversion)<a
+href="https://ecode360.com/9217014#:~:text=Conversion%20of%20a%20single,accommodate%20two%20families%2C%20provided%20that">[7]</a>.
+Evaluate potential to subdivide or assemble adjacent parcels.</li>
+</ul>
+<h2
+id="creative-unconventional-strategy-coliving-adu-portfolio-shortterm-rentals">5 Creative
+/ Unconventional Strategy (Co‑living, ADU Portfolio, Short‑Term
+Rentals)</h2>
+<ul>
+<li><strong>Minimum entry cap rate</strong> – <strong>≥ 6.5 %</strong>
+on a pro‑forma basis. This higher threshold compensates for operational
+complexity and regulatory uncertainty.</li>
+<li><strong>Expense assumptions</strong> – operating expenses can reach
+<strong>45 % of gross rent</strong> due to higher turnover, furnishings
+and management. For short‑term rentals, include TOT occupancy taxes and
+dynamic pricing fees; for co‑living, budget for utilities and cleaning
+services. Property tax uses residential rate; additional licensing fees
+may apply.</li>
+<li><strong>NOI estimation</strong> – estimate gross rent using premium
+rents per bedroom (co‑living) or per night (short‑term). For example,
+rooms may rent for 30–50 % above traditional per‑bedroom rent due to
+furnished, flexible leases. Apply a 50 % occupancy factor for seasonal
+short‑term rentals or 90 % for co‑living.</li>
+<li><strong>Screening for cap‑rate upside</strong> – evaluate whether
+premium rental revenues outweigh higher expenses. Compute pro‑forma NOI
+and ensure a ≥200 basis‑point spread between pro‑forma cap rate and
+entry cap rate. Look for properties with multiple bedrooms, flexible
+layouts or separate entrances to support co‑living or ADU
+conversion.</li>
+<li><strong>Rent growth potential</strong> – identify areas near major
+employers and transport corridors where short‑term housing is in demand.
+Monitor proposed rent‑control initiatives; a 2026 ballot proposal could
+cap rent increases to CPI or 5 %<a
+href="https://www.mass.gov/doc/final-summary-for-25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download#:~:text=This%20proposed%20law%20would%20limit,a%20violation%20of%20the%20state">[15]</a>.
+Short‑term rental regulations may limit number of days or require
+registration. Ensure compliance with state rules on security deposits
+and tenant protections (landlords may require only first and last
+month’s rent and one month’s deposit<a
+href="https://www.mass.gov/info-details/security-deposits-and-last-months-rent#:~:text=Landlords%20are%C2%A0allowed%20to%20collect%20the,for%20a%20lock%20and%20key">[16]</a>)
+and abide by eviction timelines (14 days for nonpayment; 30 days for
+other causes)<a
+href="https://www.mass.gov/info-details/tenants-guide-to-eviction#:~:text=,you%20need%20to%20leave%20immediately">[17]</a>.</li>
+<li><strong>Development optionality</strong> – focus on single‑family
+properties with large basements, garages or carriage houses that can be
+converted into accessory dwelling units. The new ADU law allows units up
+to 900 ft² without special permits and prohibits owner‑occupancy
+requirements<a
+href="https://www.mass.gov/info-details/accessory-dwelling-units#:~:text=On%20Aug,will%20make%20a%20big%20difference">[5]</a>.
+This enables creation of mini‑ADU portfolios on multiple
+properties.</li>
+</ul>
+<h2 id="screening-workflow-summary">Screening Workflow Summary</h2>
+<ol type="1">
+<li><strong>Compute rent assumptions</strong> using median rents by
+bedroom and property type from external sources and MLS analysis.</li>
+<li><strong>Calculate NOI and entry cap rates</strong> for each MLS
+listing using the formulas above and strategy‑specific expense
+assumptions.</li>
+<li><strong>Filter by minimum cap rate thresholds</strong> to remove
+deals below the strategy’s entry criterion.</li>
+<li><strong>Evaluate cap‑rate upside</strong> by projecting stabilized
+rents and expenses; require minimum basis‑point improvements.</li>
+<li><strong>Assess rent growth potential</strong> using
+neighbourhood‑level trends (price appreciation, days on market,
+demographic growth, employer proximity).</li>
+<li><strong>Check development optionality</strong> based on lot size,
+zoning and potential for additional units or ADUs.</li>
+<li><strong>Rank remaining properties</strong> by projected
+risk‑adjusted return for further due diligence.</li>
+</ol>
+<p>These deal selection rules provide a repeatable approach to screening
+MLS data for real‑estate investment opportunities in Marlborough across
+multiple strategies, ensuring that potential acquisitions align with
+targeted cap rates, rent growth prospects and development flexibility
+while acknowledging regulatory constraints.</p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/#:~:text=The%20average%20rent%20for%20an,the%20average%20rent%20was%20%242%2C456">[1]</a>
+Average Rent in Marlborough, MA: 2026 Rent Prices by Neighborhood</p>
+<p><a
+href="https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/">https://www.rentcafe.com/average-rent-market-trends/us/ma/marlborough/</a></p>
+<p><a
+href="https://marlboroughedc.com/fast-facts-data/#:~:text=Premier%20Companies%3A%20Cytiva%2C%20Boston%20Scientific%2C,DuPont%2C%20Ken%E2%80%99s%20Foods%2C%20Lifeward%2C%20Sartorius">[2]</a>
+Fast Facts &amp; Data - Marlborough Economic Development Corporation</p>
+<p><a
+href="https://marlboroughedc.com/fast-facts-data/">https://marlboroughedc.com/fast-facts-data/</a></p>
+<p><a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/#:~:text=,7.5">[3]</a>
+Boston Multi-Family Cap Rates 2025: Complete Investor Guide | Signal
+Real Estate</p>
+<p><a
+href="https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/">https://www.signalrealestate.com/blog/boston-multi-family-cap-rates-2025-complete-investor-guide/</a></p>
+<p><a
+href="https://www.census.gov/quickfacts/fact/table/marlboroughcitymassachusetts/RTN131222#:~:text=Median%20households%20income%20,46%2C241%20Persons%20in%20poverty%2C%20percent">[4]</a>
+U.S. Census Bureau QuickFacts: Marlborough city, Massachusetts</p>
+<p><a
+href="https://www.census.gov/quickfacts/fact/table/marlboroughcitymassachusetts/RTN131222">https://www.census.gov/quickfacts/fact/table/marlboroughcitymassachusetts/RTN131222</a></p>
+<p><a
+href="https://www.mass.gov/info-details/accessory-dwelling-units#:~:text=On%20Aug,will%20make%20a%20big%20difference">[5]</a>
+Accessory Dwelling Units | Mass.gov</p>
+<p><a
+href="https://www.mass.gov/info-details/accessory-dwelling-units">https://www.mass.gov/info-details/accessory-dwelling-units</a></p>
+<p><a
+href="https://www.marlborough-ma.gov/537/Green-District-Phases-3-4-Post-Road-Real#:~:text=This%20project%20is%20seeking%20a,resident%20amenities%2C%20and%20landscaped%20areas">[6]</a>
+Green District Phases 3 &amp; 4 (Post Road Realty LLC) Mixed-Use
+Development - Approved | Marlborough, MA</p>
+<p><a
+href="https://www.marlborough-ma.gov/537/Green-District-Phases-3-4-Post-Road-Real">https://www.marlborough-ma.gov/537/Green-District-Phases-3-4-Post-Road-Real</a></p>
+<p><a
+href="https://ecode360.com/9217014#:~:text=Conversion%20of%20a%20single,accommodate%20two%20families%2C%20provided%20that">[7]</a>
+<a
+href="https://ecode360.com/9217014#:~:text=Two%20residential%20structures%20on%20a,subject%20to%20the%20following%20conditions">[9]</a>
+<a href="https://ecode360.com/9217014#:~:text=">[10]</a> City of
+Marlborough, MA Permitted Uses</p>
+<p><a
+href="https://ecode360.com/9217014">https://ecode360.com/9217014</a></p>
+<p><a
+href="https://marlboroughedc.com/life-sciences-hub/#:~:text=Tax%20Increment%20Financing%20,Growth%20in%20Marlborough">[8]</a>
+<a
+href="https://marlboroughedc.com/life-sciences-hub/#:~:text=">[14]</a>
+Life Sciences Hub - Marlborough Economic Development Corporation</p>
+<p><a
+href="https://marlboroughedc.com/life-sciences-hub/">https://marlboroughedc.com/life-sciences-hub/</a></p>
+<p><a
+href="https://www.marlborough-ma.gov/539/Exchange-Place-JW-Capital-Partners-LLC-M#:~:text=This%20project%20is%20seeking%20and,courtyard%20adjacent%20to%20Union%20Common">[11]</a>
+Exchange Place (JW Capital Partners, LLC) Mixed Use Project at 57 Main
+Street - Approved | Marlborough, MA</p>
+<p><a
+href="https://www.marlborough-ma.gov/539/Exchange-Place-JW-Capital-Partners-LLC-M">https://www.marlborough-ma.gov/539/Exchange-Place-JW-Capital-Partners-LLC-M</a></p>
+<p><a
+href="https://www.marlborough-ma.gov/541/WP-Marlborough-MA-Owner-LLC-Walcott-Heri#:~:text=This%20project%20is%20seeking%20a,7%20acres">[12]</a>
+WP Marlborough, MA Owner, LLC [Walcott Heritage Farms] Multi-Family
+Residential Development Project at 339 Boston Post Road East - Approved
+| Marlborough, MA</p>
+<p><a
+href="https://www.marlborough-ma.gov/541/WP-Marlborough-MA-Owner-LLC-Walcott-Heri">https://www.marlborough-ma.gov/541/WP-Marlborough-MA-Owner-LLC-Walcott-Heri</a></p>
+<p><a
+href="https://marlboroughedc.com/wp-content/uploads/2025/02/495-MetroWest-Partnership-Marlborough-Community-Profile-2024_Reduced-PDF.pdf#:~:text=MARLBOROUGH%2C%20MA%20Population%3A%2041%2C391%20Median,Vacant%20Housing%20Units%3A%20%20892">[13]</a>
+Marlborough</p>
+<p><a
+href="https://marlboroughedc.com/wp-content/uploads/2025/02/495-MetroWest-Partnership-Marlborough-Community-Profile-2024_Reduced-PDF.pdf">https://marlboroughedc.com/wp-content/uploads/2025/02/495-MetroWest-Partnership-Marlborough-Community-Profile-2024_Reduced-PDF.pdf</a></p>
+<p><a
+href="https://www.mass.gov/doc/final-summary-for-25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download#:~:text=This%20proposed%20law%20would%20limit,a%20violation%20of%20the%20state">[15]</a>
+download</p>
+<p><a
+href="https://www.mass.gov/doc/final-summary-for-25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download">https://www.mass.gov/doc/final-summary-for-25-21-an-initiative-petition-to-protect-tenants-by-limiting-rent-increases/download</a></p>
+<p><a
+href="https://www.mass.gov/info-details/security-deposits-and-last-months-rent#:~:text=Landlords%20are%C2%A0allowed%20to%20collect%20the,for%20a%20lock%20and%20key">[16]</a>
+Security deposits and last month's rent | Mass.gov</p>
+<p><a
+href="https://www.mass.gov/info-details/security-deposits-and-last-months-rent">https://www.mass.gov/info-details/security-deposits-and-last-months-rent</a></p>
+<p><a
+href="https://www.mass.gov/info-details/tenants-guide-to-eviction#:~:text=,you%20need%20to%20leave%20immediately">[17]</a>
+Tenants' guide to eviction | Mass.gov</p>
+<p><a
+href="https://www.mass.gov/info-details/tenants-guide-to-eviction">https://www.mass.gov/info-details/tenants-guide-to-eviction</a></p>
+</body>
+</html>
